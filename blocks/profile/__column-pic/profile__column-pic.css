@@ -1,0 +1,8 @@
+.profile__column-pic {
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  outline: 1px sloid red;
+  max-width: 168.75px;
+  width: 100%;
+}

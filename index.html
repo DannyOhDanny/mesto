@@ -15,55 +15,76 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__pic" src="./images/profile-pic_.240x240.jpg" alt="Фото профиля" />
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__position">Исследователь океана</p>
-        <button class="profile__button-edit profile__button-edit_action_edit" type="button">
+        <div class="profile__columns">
           <img
-            class="profile__button-pic-edit"
-            src="./images/profile_button_edit.svg"
-            alt="Изменить имя профиля"
+            class="profile__column-pic"
+            src="./images/profile-pic_.240x240.jpg"
+            alt="Фото профиля"
           />
-        </button>
-        <button class="profile__button-add profile__button-add_action_add" type="button">
-          <img
-            class="profile__button-pic-add"
-            src="./images/gallery_button_add.svg"
-            alt="Добавить фото"
-          />
-        </button>
+          <div class="profile__column-bio">
+            <div class="profile__row">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__button-edit profile__button-edit_action_edit" type="button">
+                <span class="profile__button-text profile__button-text_hidden">Редактировать</span>
+                <img src="./images/profile_button_edit.svg" alt="Изменить имя профиля" />
+              </button>
+            </div>
+            <p class="profile__position">Исследователь океана</p>
+          </div>
+          <button class="profile__button-add profile__button-add_action_add" type="button">
+            <span class="profile__button-text profile__button-text_hidden">Добавить</span
+            ><img src="./images/gallery_button_add.svg" alt="Добавить фото" />
+          </button>
+        </div>
       </section>
-      <section class="elements"></section>
-      <div class="element">
-        <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-        <h2 class="element__title">Карачаевск</h2>
-        <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-      </div>
-      <div class="element">
-        <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-        <h2 class="element__title">Гора Эльбрус</h2>
-        <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-      </div>
-      <div class="element">
-        <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-        <h2 class="element__title">Домбай</h2>
-        <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-      </div>
-      <div class="element">
-        <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-        <h2 class="element__title">Карачаевск</h2>
-        <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-      </div>
-      <div class="element">
-        <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-        <h2 class="element__title">Гора Эльбрус</h2>
-        <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-      </div>
-      <div class="element">
-        <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-        <h2 class="element__title">Домбай</h2>
-        <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-      </div>
+      <section class="elements">
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Карачаево-Черкессия</h2>
+            <img
+              class="element__heart element__heart_disabled element__heart_active"
+              src="./images/element_heart.svg"
+              alt="Символ-лайк"
+            />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Домбай</h2>
+            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Карачаево-Черкессия</h2>
+            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Домбай</h2>
+            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+          </div>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2020 Mesto&nbsp;Russia</p>

@@ -1,0 +1,16 @@
+.profile__button-add {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: 1px solid red;
+}
+
+.profile__button-add:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.4s ease-in-out;
+}

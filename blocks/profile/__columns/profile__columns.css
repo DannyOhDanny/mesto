@@ -1,0 +1,11 @@
+.profile__columns {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: 1px solid red;
+  max-width: 880px;
+  width: 100%;
+  position: relative;
+}
