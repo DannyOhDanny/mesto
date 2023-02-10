@@ -1,0 +1,5 @@
+.element__heart_active:hover::selection {
+  mask-image: url(../../../images/element_heart.svg);
+  fill: black;
+  z-index: 1;
+}

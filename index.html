@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./script/index.js defer"></script>
+    <script src="./script/index.js" defer></script>
     <title>Место</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="black" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="white" />
   </head>
   <body class="root">
     <header class="header">
@@ -24,64 +27,98 @@
           <div class="profile__column-bio">
             <div class="profile__row">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__button-edit profile__button-edit_action_edit" type="button">
+              <button
+                class="profile__button-edit profile__button-edit_action_edit"
+                type="button"
+                aria-label="Edit"
+              >
                 <span class="profile__button-text profile__button-text_hidden">Редактировать</span>
-                <img src="./images/profile_button_edit.svg" alt="Изменить имя профиля" />
               </button>
             </div>
             <p class="profile__position">Исследователь океана</p>
           </div>
-          <button class="profile__button-add profile__button-add_action_add" type="button">
-            <span class="profile__button-text profile__button-text_hidden">Добавить</span
-            ><img src="./images/gallery_button_add.svg" alt="Добавить фото" />
-          </button>
+          <div class="profile__column-button-add">
+            <button
+              class="profile__button-add profile__button-add_action_add"
+              type="button"
+              aria-label="Add"
+            >
+              <span class="profile__button-text profile__button-text_hidden">Добавить</span>
+            </button>
+          </div>
         </div>
       </section>
-      <section class="elements">
+      <section class="elements" aria-label="Карточки мест">
         <div class="element">
           <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Карачаево-Черкессия</h2>
-            <img
+            <button
               class="element__heart element__heart_disabled element__heart_active"
-              src="./images/element_heart.svg"
-              alt="Символ-лайк"
-            />
+              aria-label="Like"
+            >
+              <img src="./images/element_heart.svg" alt="Символ-лайк" />
+            </button>
           </div>
         </div>
         <div class="element">
-          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <img class="element__pic" src="./images/element_pic-2.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+            <button
+              class="element__heart element__heart_disabled element__heart_active"
+              aria-label="Like"
+            >
+              <img src="./images/element_heart.svg" alt="Символ-лайк" />
+            </button>
           </div>
         </div>
         <div class="element">
-          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+          <img class="element__pic" src="./images/element_pic-3.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Домбай</h2>
-            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+            <button
+              class="element__heart element__heart_disabled element__heart_active"
+              aria-label="Like"
+            >
+              <img src="./images/element_heart.svg" alt="Символ-лайк" />
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-2.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Эльбрус</h2>
+            <button
+              class="element__heart element__heart_disabled element__heart_active"
+              aria-label="Like"
+            >
+              <img src="./images/element_heart.svg" alt="Символ-лайк" />
+            </button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__pic" src="./images/element_pic-3.jpg" alt="Фото" />
+          <div class="element__title-area">
+            <h2 class="element__title">Домбай</h2>
+            <button
+              class="element__heart element__heart_disabled element__heart_active"
+              aria-label="Like"
+            >
+              <img src="./images/element_heart.svg" alt="Символ-лайк" />
+            </button>
           </div>
         </div>
         <div class="element">
           <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Карачаево-Черкессия</h2>
-            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Домбай</h2>
-            <img class="element__heart" src="./images/element_heart.svg" alt="Символ-лайк" />
+            <button
+              class="element__heart element__heart_disabled element__heart_active"
+              aria-label="Like"
+            >
+              <img src="./images/element_heart.svg" alt="Символ-лайк" />
+            </button>
           </div>
         </div>
       </section>
@@ -89,5 +126,24 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2020 Mesto&nbsp;Russia</p>
     </footer>
+    <div class="popup popup_hidden">
+      <div class="popup__edit-form">
+        <h2 class="popup__input-title">Редактировать профиль</h2>
+        <input name="name" placeholder="Имя" type="text" class="popup__input-name" value="" />
+        <input
+          name="position"
+          placeholder="Должность"
+          type="text"
+          class="popup__input-name"
+          value=""
+        />
+        <button class="popup__button-save" type="button" aria-label="Save">Сохранить</button>
+        <button
+          class="popup__button-close popup__button-close_disabled"
+          type="button"
+          aria-label="Close"
+        ></button>
+      </div>
+    </div>
   </body>
 </html>
