@@ -4,10 +4,21 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  outline: 1px solid red;
 }
 
-@media screen and (min-width: 760px) and (max-width: 1279px) {
+@media screen and (min-width: 1171px) and (max-width: 1279px) {
+  .header {
+    padding: 45px 193px 30px 193px;
+  }
+}
+
+@media screen and (min-width: 1060px) and (max-width: 1170px) {
+  .header {
+    padding: 45px 145px 30px 145px;
+  }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1059px) {
   .header {
     padding: 45px 90px 30px 90px;
   }

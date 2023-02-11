@@ -1,12 +1,23 @@
 .footer {
   margin: 0;
   padding: 67px 200px 60px 200px;
-  outline: 1px solid red;
 }
 
-@media screen and (min-width: 760px) and (max-width: 1279px) {
+@media screen and (min-width: 1171px) and (max-width: 1279px) {
   .footer {
-    padding: 57px 90px 50px 90px;
+    padding: 67px 193px 60px 193px;
+  }
+}
+
+@media screen and (min-width: 1060px) and (max-width: 1170px) {
+  .footer {
+    padding: 57px 145px 50px 145px;
+  }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1059px) {
+  .footer {
+    padding: 50px 90px 40px 90px;
   }
 }
 
