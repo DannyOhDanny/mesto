@@ -1,17 +1,28 @@
-# Проект: Место
+# Проект "Место"
 
-### Обзор
+## Описание проекта
 
-* Figma
-* Картинки
+Цель проекта - создание адаптивной верстки для одностраничного сайта с элементами форм и попапов по макету из Figma с использованеим языка разметки `HTML` , таблиц стилей `CSS` (включая Flex и Grid Layouts), методологии `БЭМ` Nested, описанием интерактива через `Java Script` а также работа с репозиториями `Git` и `GitHub Pages`.
 
-**Figma**
+![Alt-текст](./images/project-mesto_preview.jpg 'Превью проекта')
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+**Ссылка на GitHub Pages:**
+https://dannyohdanny.github.io/mesto/
 
-**Картинки**
+**Используемые технологии:**
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=html5&fill=1A5286)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=css3&fill=1A5286)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=js3&fill=1A5286)](https://github.com/harish-sethuraman/readme-components)
 
-Удачи!
+**Инструменты разработчика:**
+
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=github&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=git&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=markdown&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
+
+**Системные требования:**
+
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=windows&fill=3498db)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=ios&fill=3498db)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=linux&fill=3498db)](https://github.com/harish-sethuraman/readme-components)

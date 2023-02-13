@@ -30,6 +30,8 @@ userPositionInput.value = user.position;
 
 const savePopupButton = document.querySelector('.popup__button-save');
 
+/* Предыдущий вариант без выхода из окна после ввода данных
+
 savePopupButton.addEventListener('click', function (event) {
   if (!userPositionInput.value) {
     throw new Error('Имя не введено!');
@@ -45,5 +47,20 @@ savePopupButton.addEventListener('click', function (event) {
   } else {
     const value = userPositionInput.value;
     userPosition.textContent = value;
+  }
+});
+*/
+
+savePopupButton.addEventListener('click', function (event) {
+  if (!userNameInput.value || !userPositionInput.value) {
+    throw new Error('Данные не введены!');
+  } else {
+    const nameValue = userNameInput.value;
+    userName.textContent = nameValue;
+
+    const positionValue = userPositionInput.value;
+    userPosition.textContent = positionValue;
+
+    editPopup.classList.add('popup_hidden');
   }
 });
