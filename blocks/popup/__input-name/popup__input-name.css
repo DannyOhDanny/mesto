@@ -7,8 +7,8 @@
   line-height: 1.2;
   max-width: 358px;
   border: none;
-  opacity: 0.2;
-  border-bottom: 1px solid #000000;
+  opacity: 1;
+  border-bottom: 1px solid #8d8d8d;
   color: rgb(0, 0, 0);
 }
 
@@ -17,6 +17,15 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
+  opacity: 0.2;
+}
+
+.popup__input-name::-webkit-input-placeholder,
+.popup__input-name::-moz-placeholder,
+.popup__input-name:-moz-placeholder,
+.popup__input-name:-ms-input-placeholder {
+  opacity: 1;
+  color: rgb(0, 0, 0);
 }
 
 .popup__input-name:last-of-type {
