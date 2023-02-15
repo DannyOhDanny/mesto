@@ -8,10 +8,10 @@
   background-color: transparent;
   background-size: cover;
   bottom: 0;
+  position: fixed;
   top: calc((100vh - 430px) / 2);
   right: calc((100vw - 480px) / 2);
   cursor: pointer;
-  position: fixed;
 }
 
 .popup__button-close:hover {
@@ -32,7 +32,7 @@
   .popup__button-close {
     width: 20px;
     height: 20px;
-    top: calc((100vh - 282px) / 2);
-    right: calc((100vw - 282px) / 2);
+    top: calc((100vh - 268px) / 2);
+    right: calc((100vw - 268px) / 2);
   }
 }
