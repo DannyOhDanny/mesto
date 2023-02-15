@@ -2,7 +2,6 @@
   margin: 0 200px;
   padding: 45px 0 39px 0;
   position: relative;
-  display: flex;
   flex-direction: column;
   border-bottom: 2px solid #545454;
   opacity: 0.7;
