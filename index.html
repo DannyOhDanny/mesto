@@ -14,7 +14,6 @@
   <body class="root">
     <header class="header">
       <img class="header__logo" src="./images/logo-pic.svg" alt="Лого" />
-      <div class="header__line"></div>
     </header>
     <main class="content">
       <section class="profile">
@@ -26,109 +25,117 @@
           />
           <div class="profile__column-bio">
             <div class="profile__row">
-              <h1 class="profile__name"></h1>
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button
                 class="profile__button-edit profile__button-edit_action_edit"
                 type="button"
                 aria-label="Edit"
-              >
-                <span class="sr-only">Редактировать</span>
-              </button>
+              ></button>
             </div>
-            <p class="profile__position"></p>
+            <p class="profile__position">Исследователь океана</p>
           </div>
-          <div class="profile__column-button-add">
-            <button
-              class="profile__button-add profile__button-add_action_add"
-              type="button"
-              aria-label="Add"
-            >
-              <span class="sr-only">Добавить</span>
-            </button>
-          </div>
+          <button
+            class="profile__button-add profile__button-add_action_add"
+            type="button"
+            aria-label="Add"
+          ></button>
         </div>
       </section>
       <section class="elements" aria-label="Карточки мест">
-        <div class="element">
+        <article class="element">
           <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__heart element__heart_active" aria-label="Like">
-              <img src="./images/element_heart.svg" alt="Символ-лайк" />
-            </button>
+            <button
+              class="element__heart element__heart_active"
+              aria-label="Like"
+              type="button"
+            ></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img class="element__pic" src="./images/element_pic-2.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__heart element__heart_active" aria-label="Like">
-              <img src="./images/element_heart.svg" alt="Символ-лайк" />
-            </button>
+            <button
+              class="element__heart element__heart_active"
+              aria-label="Like"
+              type="button"
+            ></button>
           </div>
-        </div>
-        <div class="element">
+        </article>
+        <article class="element">
           <img class="element__pic" src="./images/element_pic-3.jpg" alt="Фото" />
           <div class="element__title-area">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__heart element__heart_active" aria-label="Like">
-              <img src="./images/element_heart.svg" alt="Символ-лайк" />
-            </button>
+            <button
+              class="element__heart element__heart_active"
+              aria-label="Like"
+              type="button"
+            ></button>
           </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="./images/element_pic-2.jpg" alt="Фото" />
+        </article>
+        <article class="element">
+          <img class="element__pic" src="./images/element_pic-4.jpg" alt="Фото" />
           <div class="element__title-area">
-            <h2 class="element__title">Эльбрус</h2>
-            <button class="element__heart element__heart_active" aria-label="Like">
-              <img src="./images/element_heart.svg" alt="Символ-лайк" />
-            </button>
+            <h2 class="element__title">Солнечногорск</h2>
+            <button
+              class="element__heart element__heart_active"
+              aria-label="Like"
+              type="button"
+            ></button>
           </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="./images/element_pic-3.jpg" alt="Фото" />
+        </article>
+        <article class="element">
+          <img class="element__pic" src="./images/element_pic-5.jpg" alt="Фото" />
           <div class="element__title-area">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__heart element__heart_active" aria-label="Like">
-              <img src="./images/element_heart.svg" alt="Символ-лайк" />
-            </button>
+            <h2 class="element__title">Выборг</h2>
+            <button
+              class="element__heart element__heart_active"
+              aria-label="Like"
+              type="button"
+            ></button>
           </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
+        </article>
+        <article class="element">
+          <img class="element__pic" src="./images/element_pic-6.jpg" alt="Фото" />
           <div class="element__title-area">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__heart element__heart_active" aria-label="Like">
-              <img src="./images/element_heart.svg" alt="Символ-лайк" />
-            </button>
+            <h2 class="element__title">Куршская коса</h2>
+            <button
+              class="element__heart element__heart_active"
+              aria-label="Like"
+              type="button"
+            ></button>
           </div>
-        </div>
+        </article>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2020 Mesto&nbsp;Russia</p>
     </footer>
-    <div class="popup popup_hidden">
+    <div class="popup popup_hidden" id="popup">
       <div class="popup__edit-form">
-        <h2 class="popup__input-title">Редактировать профиль</h2>
-        <input
-          name="name"
-          placeholder="Имя"
-          type="text"
-          class="popup__input-name popup__input-name_type_name"
-          value=""
-          onfocus="this.value=''"
-        />
-        <input
-          name="position"
-          placeholder="О себе"
-          type="text"
-          class="popup__input-name popup__input-name_type_position"
-          value=""
-          onfocus="this.value=''"
-        />
-        <button class="popup__button-save" type="button" aria-label="Save">Сохранить</button>
         <button class="popup__button-close" type="button" aria-label="Close"></button>
+        <form class="popup__form" name="form">
+          <h2 class="popup__input-title">Редактировать профиль</h2>
+          <input
+            name="name"
+            placeholder="Имя"
+            type="text"
+            class="popup__input-name popup__input-name_type_name"
+            value=""
+            onfocus="this.value=''"
+          />
+          <input
+            name="position"
+            placeholder="О себе"
+            type="text"
+            class="popup__input-name popup__input-name_type_position"
+            value=""
+            onfocus="this.value=''"
+          />
+          <button class="popup__button-save" type="submit" aria-label="Save">Сохранить</button>
+        </form>
       </div>
     </div>
   </body>

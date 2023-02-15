@@ -4,5 +4,6 @@
   border-radius: 50%;
   outline: 1px sloid red;
   max-width: 120px;
+  max-height: 120px;
   width: 100%;
 }

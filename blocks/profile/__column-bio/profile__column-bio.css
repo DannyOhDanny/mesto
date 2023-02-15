@@ -2,16 +2,17 @@
   margin: 0;
   padding: 0 0 0 30px;
   display: flex;
+  flex-direction: column;
   max-width: 336px;
   width: 100%;
-  flex-direction: column;
-  justify-content: baseline;
   gap: 10px;
 }
 
 @media screen and (min-width: 320px) and (max-width: 845px) {
   .profile__column-bio {
     padding: 28px 0 0 0;
-    gap: 9px;
+    gap: 10px;
+    justify-content: baseline;
+    align-items: center;
   }
 }

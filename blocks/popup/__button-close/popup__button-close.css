@@ -7,9 +7,9 @@
   background-image: url(../../../images/popup__button-close.svg);
   background-color: transparent;
   background-size: cover;
-  top: 155px;
   bottom: 0;
-  right: calc((100vw - 520px) / 2);
+  top: calc((100vh - 430px) / 2);
+  right: calc((100vw - 480px) / 2);
   cursor: pointer;
   position: fixed;
 }
@@ -21,10 +21,10 @@
 
 @media screen and (min-width: 469px) and (max-width: 760px) {
   .popup__button-close {
-    width: 20px;
-    height: 20px;
-    right: calc((100vw - 430px) / 2);
-    top: 165px;
+    width: 22px;
+    height: 22px;
+    top: calc((100vh - 430px) / 2);
+    right: calc((100vw - 468px) / 2);
   }
 }
 
@@ -32,7 +32,7 @@
   .popup__button-close {
     width: 20px;
     height: 20px;
-    top: 87px;
+    top: calc((100vh - 282px) / 2);
     right: calc((100vw - 282px) / 2);
   }
 }

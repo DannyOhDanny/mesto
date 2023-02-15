@@ -7,6 +7,8 @@
   max-width: 880px;
   width: 100%;
   position: relative;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 @media screen and (min-width: 320px) and (max-width: 845px) {
