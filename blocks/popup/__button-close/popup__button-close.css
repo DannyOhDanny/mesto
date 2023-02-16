@@ -23,7 +23,7 @@
   .popup__button-close {
     width: 22px;
     height: 22px;
-    top: calc((100vh - 430px) / 2);
+    top: calc((100vh - 400px) / 2);
     right: calc((100vw - 468px) / 2);
   }
 }
@@ -32,7 +32,7 @@
   .popup__button-close {
     width: 20px;
     height: 20px;
-    top: calc((100vh - 268px) / 2);
-    right: calc((100vw - 268px) / 2);
+    top: calc((100vh - 390px) / 2);
+    right: calc((100vw - 282px) / 2);
   }
 }
