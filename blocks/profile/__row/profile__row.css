@@ -3,7 +3,6 @@
   padding: 0;
   display: flex;
   flex-direction: row;
-  justify-content: baseline;
   align-items: center;
   gap: 18px;
 }
