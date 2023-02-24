@@ -41,79 +41,24 @@
           ></button>
         </div>
       </section>
-      <section class="elements" aria-label="Карточки мест">
-        <article class="element">
-          <img class="element__pic" src="./images/element_pic-1.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button
-              class="element__heart element__heart_active"
-              aria-label="Like"
-              type="button"
-            ></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/element_pic-2.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button
-              class="element__heart element__heart_active"
-              aria-label="Like"
-              type="button"
-            ></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/element_pic-3.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Домбай</h2>
-            <button
-              class="element__heart element__heart_active"
-              aria-label="Like"
-              type="button"
-            ></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/element_pic-4.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Солнечногорск</h2>
-            <button
-              class="element__heart element__heart_active"
-              aria-label="Like"
-              type="button"
-            ></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/element_pic-5.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Выборг</h2>
-            <button
-              class="element__heart element__heart_active"
-              aria-label="Like"
-              type="button"
-            ></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/element_pic-6.jpg" alt="Фото" />
-          <div class="element__title-area">
-            <h2 class="element__title">Куршская коса</h2>
-            <button
-              class="element__heart element__heart_active"
-              aria-label="Like"
-              type="button"
-            ></button>
-          </div>
-        </article>
-      </section>
+      <section class="elements" aria-label="Карточки мест"></section>
     </main>
     <footer class="footer">
-      <p class="footer__copyright">&copy;&nbsp;2020 Mesto&nbsp;Russia</p>
+      <p class="footer__copyright">&copy;&nbsp;2023 Mesto&nbsp;Russia</p>
     </footer>
-    <div class="popup popup_hidden">
+    <!--Шаблон карточки-->
+    <template id="element-template">
+      <article class="element">
+        <img class="element__pic" />
+        <button class="element__delete-btn" aria-label="Delete" type="button"></button>
+        <div class="element__title-area">
+          <h2 class="element__title"></h2>
+          <button class="element__heart" aria-label="Like" type="button"></button>
+        </div>
+      </article>
+    </template>
+    <!--Форма попапа с редактированием-->
+    <div class="popup popup_hidden" id="edit-form">
       <div class="popup__edit-form">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
         <form class="popup__form" name="form">
@@ -136,6 +81,40 @@
           />
           <button class="popup__button-save" type="submit" aria-label="Save">Сохранить</button>
         </form>
+      </div>
+    </div>
+    <!--Форма попапа добавления-->
+    <div class="popup popup_hidden" id="add-form">
+      <div class="popup__edit-form">
+        <button class="popup__button-close" type="button" aria-label="Close"></button>
+        <form class="popup__form-add" name="form">
+          <h2 class="popup__input-title">Новое место</h2>
+          <input
+            name="pic-name"
+            placeholder="Название"
+            type="text"
+            class="popup__input-name popup__input-name_type_heading"
+            value=""
+            onfocus="this.value=''"
+          />
+          <input
+            name="url"
+            placeholder="Ссылка на картинку"
+            type="url"
+            class="popup__input-name popup__input-name_type_url"
+            value=""
+            onfocus="this.value=''"
+          />
+          <button class="popup__button-save" type="submit" aria-label="Save">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <!--Попап изображения-->
+    <div class="popup popup_hidden" id="image-popup">
+      <div class="popup__edit-form">
+        <button class="popup__button-close" type="button" aria-label="Close"></button>
+        <image class="popup__image" src="./images/element_pic-6.jpg"></image>
+        <figcaption class="popup__title">Валдай</figcaption>
       </div>
     </div>
   </body>
