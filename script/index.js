@@ -6,6 +6,8 @@ const popupButtonClose = document.querySelector('.popup__button-close');
 const elementsContainer = document.querySelector('.elements');
 const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
 const addPopup = document.querySelector('#add-popup');
+const addFormElement = document.querySelector('#add-form');
+
 let nameHTML = document.querySelector('.profile__name');
 let positionHTML = document.querySelector('.profile__position');
 let userNameInput = document.querySelector('.popup__input-name_type_name');
@@ -14,6 +16,7 @@ let userPositionInput = document.querySelector('.popup__input-name_type_position
 profileButtonEdit.addEventListener('click', openEditPopup);
 popupButtonClose.addEventListener('click', closePopup);
 editFormElement.addEventListener('submit', handleFormSubmit);
+addFormElement.addEventListener('submit', handleFormAddImage);
 
 function closePopup() {
   popup.classList.add('popup_hidden');
@@ -84,7 +87,7 @@ function createCard(element) {
   elementHeading.textContent = element.name;
   const elementPicture = elementTemplate.querySelector('.element__pic');
   elementPicture.setAttribute('src', element.link);
-  elementPicture.setAttribute('alt', 'Фото');
+  elementPicture.setAttribute('alt', element.name);
 
   const likeElement = elementTemplate.querySelector('.element__heart');
   likeElement.addEventListener('click', function (evt) {
@@ -106,28 +109,38 @@ deleteBtn.forEach(btn => {
   });
 });
 
+// Добавление новых карточек
+//ф-ия создает шаблон. Но новые данные в форму не уходят.
+
+function addImageCard(nameValue, urlValue) {
+  const cardTemplate = document.querySelector('#element-template').content;
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardElementTitle = cardElement.querySelector('.element__title');
+  const cardElementUrl = cardElement.querySelector('.element__pic');
+
+  cardElementTitle.textContent = nameValue;
+  cardElementUrl.textContent = urlValue;
+  console.log(cardElementTitle.textContent);
+
+  cardElementUrl.setAttribute('src', urlValue);
+  cardElementUrl.setAttribute('alt', nameValue);
+
+  cardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__heart_active');
+  });
+
+  elementsContainer.prepend(cardElement);
+}
+
 profileButtonAdd.addEventListener('click', function () {
   openPopupAdd();
+});
 
+function handleFormAddImage(evt) {
+  evt.preventDefault();
   const name = document.querySelector('.popup__input-name_type_heading');
   const link = document.querySelector('.popup__input-name_type_url');
 
   addImageCard(name.value, link.value);
-});
-
-//ф-ия создает шаблон. Но новые данные в форму не уходят.
-
-function addImageCard(nameValue, urlValue) {
-  const CardTemplate = document.querySelector('#element-template').content;
-  const CardElement = CardTemplate.querySelector('.element').cloneNode(true);
-
-  CardElement.querySelector('.element__title').textContent = nameValue;
-  CardElement.querySelector('.element__pic').textContent = urlValue;
-  CardElement.setAttribute('src', urlValue);
-  CardElement.setAttribute('alt', 'Фото');
-  CardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__heart_active');
-  });
-
-  elementsContainer.prepend(CardElement);
+  closePopup();
 }
