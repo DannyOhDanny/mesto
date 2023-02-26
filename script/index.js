@@ -1,28 +1,32 @@
-const popup = document.querySelector('#edit-form');
+const popup = document.querySelector('.popup');
+const editPopup = document.querySelector('#edit-popup');
 const profileButtonEdit = document.querySelector('.profile__button-edit');
+const editFormElement = document.querySelector('#edit-form');
 const popupButtonClose = document.querySelector('.popup__button-close');
-const formElement = document.querySelector('.popup__form');
-const pageMain = document.querySelector('.elements');
+const elementsContainer = document.querySelector('.elements');
+const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
+const addPopup = document.querySelector('#add-popup');
 let nameHTML = document.querySelector('.profile__name');
 let positionHTML = document.querySelector('.profile__position');
 let userNameInput = document.querySelector('.popup__input-name_type_name');
 let userPositionInput = document.querySelector('.popup__input-name_type_position');
 
-let pictureHeadingInput = document.querySelector('.popup__input-name_type_heading');
-let pictureUrlInput = document.querySelector('.popup__input-name_type_url');
-
-profileButtonEdit.addEventListener('click', openPopup);
+profileButtonEdit.addEventListener('click', openEditPopup);
 popupButtonClose.addEventListener('click', closePopup);
-formElement.addEventListener('submit', handleFormSubmit);
+editFormElement.addEventListener('submit', handleFormSubmit);
 
 function closePopup() {
   popup.classList.add('popup_hidden');
 }
 
-function openPopup() {
-  popup.classList.remove('popup_hidden');
+function openEditPopup() {
+  editPopup.classList.remove('popup_hidden');
   userNameInput.value = nameHTML.textContent;
   userPositionInput.value = positionHTML.textContent;
+}
+
+function openPopupAdd() {
+  addPopup.classList.remove('popup_hidden');
 }
 
 function handleFormSubmit(evt) {
@@ -30,14 +34,6 @@ function handleFormSubmit(evt) {
   nameHTML.textContent = userNameInput.value;
   positionHTML.textContent = userPositionInput.value;
   closePopup();
-}
-
-const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
-const popupAdd = document.querySelector('#add-form');
-profileButtonAdd.addEventListener('click', openPopupAdd);
-
-function openPopupAdd() {
-  popupAdd.classList.remove('popup_hidden');
 }
 
 // Исходный массив + 3 свои карточки
@@ -82,7 +78,7 @@ const initialCards = [
 ];
 // код, добавляющий карточки из массива на страницу
 
-initialCards.forEach(function (element) {
+function createCard(element) {
   const elementTemplate = document.querySelector('#element-template').content.cloneNode(true);
   const elementHeading = elementTemplate.querySelector('.element__title');
   elementHeading.textContent = element.name;
@@ -95,8 +91,10 @@ initialCards.forEach(function (element) {
     evt.target.classList.toggle('element__heart_active');
   });
 
-  pageMain.append(elementTemplate);
-});
+  elementsContainer.append(elementTemplate);
+}
+
+initialCards.forEach(createCard);
 
 //код удаляющий карточки из массива
 const deleteBtn = document.querySelectorAll('.element__delete-btn');
@@ -107,3 +105,29 @@ deleteBtn.forEach(btn => {
     deletedElement.parentNode.removeChild(deletedElement);
   });
 });
+
+profileButtonAdd.addEventListener('click', function () {
+  openPopupAdd();
+
+  const name = document.querySelector('.popup__input-name_type_heading');
+  const link = document.querySelector('.popup__input-name_type_url');
+
+  addImageCard(name.value, link.value);
+});
+
+//ф-ия создает шаблон. Но новые данные в форму не уходят.
+
+function addImageCard(nameValue, urlValue) {
+  const CardTemplate = document.querySelector('#element-template').content;
+  const CardElement = CardTemplate.querySelector('.element').cloneNode(true);
+
+  CardElement.querySelector('.element__title').textContent = nameValue;
+  CardElement.querySelector('.element__pic').textContent = urlValue;
+  CardElement.setAttribute('src', urlValue);
+  CardElement.setAttribute('alt', 'Фото');
+  CardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__heart_active');
+  });
+
+  elementsContainer.prepend(CardElement);
+}

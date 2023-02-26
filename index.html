@@ -46,6 +46,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2023 Mesto&nbsp;Russia</p>
     </footer>
+
     <!--Шаблон карточки-->
     <template id="element-template">
       <article class="element">
@@ -57,11 +58,12 @@
         </div>
       </article>
     </template>
+
     <!--Форма попапа с редактированием-->
-    <div class="popup popup_hidden" id="edit-form">
+    <div class="popup popup_hidden" id="edit-popup">
       <div class="popup__edit-form">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
-        <form class="popup__form" name="form">
+        <form class="popup__form" id="edit-form" name="form">
           <h2 class="popup__input-title">Редактировать профиль</h2>
           <input
             name="name"
@@ -83,11 +85,12 @@
         </form>
       </div>
     </div>
+
     <!--Форма попапа добавления-->
-    <div class="popup popup_hidden" id="add-form">
+    <div class="popup popup_hidden" id="add-popup">
       <div class="popup__edit-form">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
-        <form class="popup__form-add" name="form">
+        <form class="popup__form-add" id="add-form" name="form">
           <h2 class="popup__input-title">Новое место</h2>
           <input
             name="pic-name"
@@ -100,7 +103,7 @@
           <input
             name="url"
             placeholder="Ссылка на картинку"
-            type="url"
+            type="text"
             class="popup__input-name popup__input-name_type_url"
             value=""
             onfocus="this.value=''"
@@ -109,17 +112,16 @@
         </form>
       </div>
     </div>
+
     <!--Попап изображения-->
-    <div class="popup" id="image-popup">
-      <button
-        class="popup__button-close popup__button-close_type_image"
-        type="button"
-        aria-label="Close"
-      ></button>
-      <figure class="popup__image">
-        <image class="popup__pic" src="./images/element_pic-5.jpg" alt="Фото"></image>
-        <figcaption class="popup__title">Валдай</figcaption>
-      </figure>
+    <div class="popup popup_hidden" id="image-popup">
+      <div class="popup__img-container">
+        <button class="popup__button-close" type="button" aria-label="Close"></button>
+        <figure class="popup__image">
+          <image class="popup__pic" src="./images/element_pic-5.jpg" alt="Фото"></image>
+          <figcaption class="popup__title">Валдай</figcaption>
+        </figure>
+      </div>
     </div>
   </body>
 </html>
