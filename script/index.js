@@ -1,14 +1,13 @@
 const popup = document.querySelector('.popup');
-const editPopup = document.querySelector('#edit-popup');
-const profileButtonEdit = document.querySelector('.profile__button-edit');
-const editFormElement = document.querySelector('#edit-form');
-const popupButtonClose = document.querySelector('.popup__button-close');
-const addPopupButtonClose = document.querySelector('.popup__button-close_type_add');
 const elementsContainer = document.querySelector('.elements');
-const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
+const editPopup = document.querySelector('#edit-popup');
+const editFormElement = document.querySelector('#edit-form');
 const addPopup = document.querySelector('#add-popup');
 const addFormElement = document.querySelector('#add-form');
-
+const profileButtonEdit = document.querySelector('.profile__button-edit');
+const popupButtonClose = document.querySelector('.popup__button-close_type_edit');
+const addPopupButtonClose = document.querySelector('.popup__button-close_type_add');
+const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
 let nameHTML = document.querySelector('.profile__name');
 let positionHTML = document.querySelector('.profile__position');
 let userNameInput = document.querySelector('.popup__input-name_type_name');
@@ -19,6 +18,9 @@ popupButtonClose.addEventListener('click', closePopup);
 editFormElement.addEventListener('submit', handleFormSubmit);
 addFormElement.addEventListener('submit', handleFormAddImage);
 addPopupButtonClose.addEventListener('click', closePopupAdd);
+profileButtonAdd.addEventListener('click', function () {
+  openPopupAdd();
+});
 
 function closePopup() {
   popup.classList.add('popup_hidden');
@@ -117,7 +119,6 @@ deleteBtn.forEach(btn => {
 });
 
 // Добавление новых карточек
-//ф-ия создает шаблон. Но новые данные в форму не уходят.
 
 function addImageCard(nameValue, urlValue) {
   const cardTemplate = document.querySelector('#element-template').content;
@@ -143,9 +144,7 @@ function addImageCard(nameValue, urlValue) {
   });
 }
 
-profileButtonAdd.addEventListener('click', function () {
-  openPopupAdd();
-});
+//Передача инфо из импута в карточку
 
 function handleFormAddImage(evt) {
   evt.preventDefault();
