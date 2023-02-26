@@ -3,6 +3,7 @@ const editPopup = document.querySelector('#edit-popup');
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const editFormElement = document.querySelector('#edit-form');
 const popupButtonClose = document.querySelector('.popup__button-close');
+const addPopupButtonClose = document.querySelector('.popup__button-close_type_add');
 const elementsContainer = document.querySelector('.elements');
 const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
 const addPopup = document.querySelector('#add-popup');
@@ -17,9 +18,14 @@ profileButtonEdit.addEventListener('click', openEditPopup);
 popupButtonClose.addEventListener('click', closePopup);
 editFormElement.addEventListener('submit', handleFormSubmit);
 addFormElement.addEventListener('submit', handleFormAddImage);
+addPopupButtonClose.addEventListener('click', closePopupAdd);
 
 function closePopup() {
   popup.classList.add('popup_hidden');
+}
+
+function closePopupAdd() {
+  addPopup.classList.add('popup_hidden');
 }
 
 function openEditPopup() {
@@ -83,6 +89,7 @@ const initialCards = [
 
 function createCard(element) {
   const elementTemplate = document.querySelector('#element-template').content.cloneNode(true);
+
   const elementHeading = elementTemplate.querySelector('.element__title');
   elementHeading.textContent = element.name;
   const elementPicture = elementTemplate.querySelector('.element__pic');
@@ -120,7 +127,6 @@ function addImageCard(nameValue, urlValue) {
 
   cardElementTitle.textContent = nameValue;
   cardElementUrl.textContent = urlValue;
-  console.log(cardElementTitle.textContent);
 
   cardElementUrl.setAttribute('src', urlValue);
   cardElementUrl.setAttribute('alt', nameValue);
@@ -130,6 +136,11 @@ function addImageCard(nameValue, urlValue) {
   });
 
   elementsContainer.prepend(cardElement);
+
+  cardElement.querySelector('.element__delete-btn').addEventListener('click', function (evt) {
+    const deletedElement = cardElement.closest('.element');
+    deletedElement.parentNode.removeChild(deletedElement);
+  });
 }
 
 profileButtonAdd.addEventListener('click', function () {
@@ -142,5 +153,5 @@ function handleFormAddImage(evt) {
   const link = document.querySelector('.popup__input-name_type_url');
 
   addImageCard(name.value, link.value);
-  closePopup();
+  closePopupAdd();
 }
