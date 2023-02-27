@@ -111,6 +111,7 @@ function createCard(element) {
 initialCards.forEach(createCard);
 
 //код удаляющий карточки из массива
+
 const deleteBtn = document.querySelectorAll('.element__delete-btn');
 
 deleteBtn.forEach(btn => {
