@@ -104,6 +104,8 @@ function createCard(element) {
   });
 
   elementsContainer.append(elementTemplate);
+
+  elementPicture.addEventListener('click', handleImgPopup);
 }
 
 initialCards.forEach(createCard);
@@ -142,6 +144,8 @@ function addImageCard(nameValue, urlValue) {
     const deletedElement = cardElement.closest('.element');
     deletedElement.parentNode.removeChild(deletedElement);
   });
+
+  cardElementUrl.addEventListener('click', handleImgPopup);
 }
 
 //Передача инфо из импута в карточку
@@ -152,5 +156,31 @@ function handleFormAddImage(evt) {
   const link = document.querySelector('.popup__input-name_type_url');
 
   addImageCard(name.value, link.value);
+
   closePopupAdd();
+}
+
+//Ф-ия попапа изображения
+
+const modalPopup = document.querySelector('#image-popup');
+const imagesHTML = document.querySelector('.element__pic');
+const modalCaption = document.querySelector('.popup__title');
+const modalImg = document.querySelector('.popup__pic');
+const closeModalPopup = document.querySelector('.popup__button-close_type_image-popup');
+
+closeModalPopup.addEventListener('click', closeImgPopup);
+
+imagesHTML.addEventListener('click', handleImgPopup);
+
+//Присовение значений попапу
+
+function handleImgPopup() {
+  modalPopup.classList.remove('popup_hidden');
+  modalImg.src = this.src;
+  modalImg.alt = this.alt;
+  modalCaption.innerHTML = this.alt;
+}
+
+function closeImgPopup() {
+  modalPopup.classList.add('popup_hidden');
 }
