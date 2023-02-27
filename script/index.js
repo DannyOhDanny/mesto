@@ -86,15 +86,15 @@ const initialCards = [
   },
   {
     name: 'Солнечногорск',
-    link: '/images/element_pic-4.jpg'
+    link: 'https://dannyohdanny.github.io/mesto/images/element_pic-4.jpg'
   },
   {
     name: 'Куршская коса',
-    link: '/images/element_pic-5.jpg'
+    link: 'https://dannyohdanny.github.io/mesto/images/element_pic-5.jpg'
   },
   {
     name: 'Выборг',
-    link: '/images/element_pic-6.jpg'
+    link: 'https://dannyohdanny.github.io/mesto/images/element_pic-6.jpg'
   }
 ];
 // код, добавляющий карточки из массива на страницу
