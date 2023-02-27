@@ -175,7 +175,6 @@ function handleFormAddImage(evt) {
 
 //Ф-ия попапа изображения
 closeModalPopup.addEventListener('click', closeImgPopup);
-imageHTML.addEventListener('click', handleImgPopup);
 
 //Присовение значений попапу
 
