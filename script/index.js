@@ -12,21 +12,26 @@ let nameHTML = document.querySelector('.profile__name');
 let positionHTML = document.querySelector('.profile__position');
 let userNameInput = document.querySelector('.popup__input-name_type_name');
 let userPositionInput = document.querySelector('.popup__input-name_type_position');
+const modalPopup = document.querySelector('#image-popup');
+const imageHTML = document.querySelector('.element__pic');
+const modalCaption = document.querySelector('.popup__title');
+const modalImg = document.querySelector('.popup__pic');
+const closeModalPopup = document.querySelector('.popup__button-close_type_image-popup');
 
 profileButtonEdit.addEventListener('click', openEditPopup);
 popupButtonClose.addEventListener('click', closePopup);
 editFormElement.addEventListener('submit', handleFormSubmit);
 addFormElement.addEventListener('submit', handleFormAddImage);
-addPopupButtonClose.addEventListener('click', closePopupAdd);
+addPopupButtonClose.addEventListener('click', closeAddPopup);
 profileButtonAdd.addEventListener('click', function () {
-  openPopupAdd();
+  openAddPopup();
 });
 
 function closePopup() {
   popup.classList.add('popup_hidden');
 }
 
-function closePopupAdd() {
+function closeAddPopup() {
   addPopup.classList.add('popup_hidden');
 }
 
@@ -34,10 +39,15 @@ function openEditPopup() {
   editPopup.classList.remove('popup_hidden');
   userNameInput.value = nameHTML.textContent;
   userPositionInput.value = positionHTML.textContent;
+  closeAddPopup();
 }
 
-function openPopupAdd() {
+function openAddPopup() {
   addPopup.classList.remove('popup_hidden');
+}
+
+function closeImgPopup() {
+  modalPopup.classList.add('popup_hidden');
 }
 
 function handleFormSubmit(evt) {
@@ -110,7 +120,7 @@ function createCard(element) {
 
 initialCards.forEach(createCard);
 
-//код удаляющий карточки из массива
+//код, удаляющий карточки из массива
 
 const deleteBtn = document.querySelectorAll('.element__delete-btn');
 
@@ -158,20 +168,14 @@ function handleFormAddImage(evt) {
 
   addImageCard(name.value, link.value);
 
-  closePopupAdd();
+  closeAddPopup();
+
+  evt.target.reset();
 }
 
 //Ф-ия попапа изображения
-
-const modalPopup = document.querySelector('#image-popup');
-const imagesHTML = document.querySelector('.element__pic');
-const modalCaption = document.querySelector('.popup__title');
-const modalImg = document.querySelector('.popup__pic');
-const closeModalPopup = document.querySelector('.popup__button-close_type_image-popup');
-
 closeModalPopup.addEventListener('click', closeImgPopup);
-
-imagesHTML.addEventListener('click', handleImgPopup);
+imageHTML.addEventListener('click', handleImgPopup);
 
 //Присовение значений попапу
 
@@ -180,8 +184,4 @@ function handleImgPopup() {
   modalImg.src = this.src;
   modalImg.alt = this.alt;
   modalCaption.innerHTML = this.alt;
-}
-
-function closeImgPopup() {
-  modalPopup.classList.add('popup_hidden');
 }
