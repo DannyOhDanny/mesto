@@ -8,10 +8,10 @@ const profileButtonEdit = document.querySelector('.profile__button-edit');
 const popupButtonClose = document.querySelector('.popup__button-close_type_edit');
 const addPopupButtonClose = document.querySelector('.popup__button-close_type_add');
 const profileButtonAdd = document.querySelector('.profile__button-add_action_add');
-let nameHTML = document.querySelector('.profile__name');
-let positionHTML = document.querySelector('.profile__position');
-let userNameInput = document.querySelector('.popup__input-name_type_name');
-let userPositionInput = document.querySelector('.popup__input-name_type_position');
+const nameHTML = document.querySelector('.profile__name');
+const positionHTML = document.querySelector('.profile__position');
+const userNameInput = document.querySelector('.popup__input-name_type_name');
+const userPositionInput = document.querySelector('.popup__input-name_type_position');
 const modalPopup = document.querySelector('#image-popup');
 const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
@@ -28,26 +28,26 @@ profileButtonAdd.addEventListener('click', function () {
 });
 
 function closePopup() {
-  popup.classList.add('popup_hidden');
+  popup.classList.remove('popup_opened');
 }
 
 function closeAddPopup() {
-  addPopup.classList.add('popup_hidden');
+  addPopup.classList.remove('popup_opened');
 }
 
 function openEditPopup() {
-  editPopup.classList.remove('popup_hidden');
+  editPopup.classList.add('popup_opened');
   userNameInput.value = nameHTML.textContent;
   userPositionInput.value = positionHTML.textContent;
   closeAddPopup();
 }
 
 function openAddPopup() {
-  addPopup.classList.remove('popup_hidden');
+  addPopup.classList.add('popup_opened');
 }
 
 function closeImgPopup() {
-  modalPopup.classList.add('popup_hidden');
+  modalPopup.classList.remove('popup_opened');
 }
 
 function handleFormSubmit(evt) {
@@ -179,7 +179,7 @@ closeModalPopup.addEventListener('click', closeImgPopup);
 //Присовение значений попапу
 
 function handleImgPopup() {
-  modalPopup.classList.remove('popup_hidden');
+  modalPopup.classList.add('popup_opened');
   modalImg.src = this.src;
   modalImg.alt = this.alt;
   modalCaption.innerHTML = this.alt;
