@@ -38,6 +38,7 @@ const initialCards = [
     link: 'https://dannyohdanny.github.io/mesto/images/element_pic-6.jpg'
   }
 ];
+
 // Константы
 
 const elementsContainer = document.querySelector('.elements');
@@ -57,11 +58,13 @@ const imagePopup = document.querySelector('#image-popup');
 const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
+const closeButtons = document.querySelectorAll('.popup__button-close');
 
 //Слушатели
 
-editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 addCardForm.addEventListener('submit', handleAddCardForm);
+
+editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
 editProfileForm.addEventListener('submit', function () {
   closePopup(editProfilePopup);
@@ -78,7 +81,18 @@ profileButtonAdd.addEventListener('click', function () {
   openPopup(addCardPopup);
 });
 
-//Код, собирающий карточку
+//Функция редактирования профиля
+
+userPositionInput.value = positionHTML.textContent;
+userNameInput.value = nameHTML.textContent;
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  nameHTML.textContent = userNameInput.value;
+  positionHTML.textContent = userPositionInput.value;
+}
+
+//Код, собирающий карточку:
 
 function getCard(item) {
   const itemTemplate = document.querySelector('#element-template').content;
@@ -100,7 +114,7 @@ function getCard(item) {
 
   cardHeading.textContent = item.name;
   cardPicture.setAttribute('src', item.link);
-  cardPicture.setAttribute('alt', `Фото: ${item.name}`);
+  cardPicture.setAttribute('alt', item.name);
 
   return cardItem;
 }
@@ -109,55 +123,22 @@ function getCard(item) {
 
 function createCard(element) {
   const elementTemplate = getCard(element);
-  elementsContainer.append(elementTemplate);
+  elementsContainer.prepend(elementTemplate);
 }
 
-//мВызов функции, создающей карточки из массива
+//Вызов функции, создающей карточки из массива
+
 initialCards.forEach(createCard);
-
-// Добавление новых карточек
-
-function addImageCard(nameValue, urlValue) {
-  const newcardTemplate = document.querySelector('#element-template').content;
-  const newcardElement = newcardTemplate.querySelector('.element').cloneNode(true);
-  const cardElementTitle = newcardElement.querySelector('.element__title');
-  const cardElementImg = newcardElement.querySelector('.element__pic');
-  const deleteButton = newcardElement.querySelector('.element__delete-btn');
-
-  newcardElement.querySelector('.element__heart').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__heart_active');
-  });
-
-  deleteButton.addEventListener('click', function (evt) {
-    newcardElement.remove();
-  });
-
-  cardElementImg.addEventListener('click', handleImgPopup);
-
-  cardElementTitle.textContent = nameValue;
-  cardElementImg.textContent = urlValue;
-  cardElementImg.setAttribute('src', urlValue);
-  cardElementImg.setAttribute('alt', nameValue);
-
-  elementsContainer.prepend(newcardElement);
-}
-
-//Функция редактирования профиля
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  nameHTML.textContent = userNameInput.value;
-  positionHTML.textContent = userPositionInput.value;
-}
 
 //Передача инфо из импута в карточку добавления изображения
 
 function handleAddCardForm(evt) {
   evt.preventDefault();
-  const name = titleInput;
-  const link = urlInput;
-
-  addImageCard(name.value, link.value);
-
+  const element = {
+    name: titleInput.value,
+    link: urlInput.value
+  };
+  createCard(element);
   evt.target.reset();
 }
 
@@ -167,11 +148,10 @@ function handleImgPopup(evt) {
   imagePopup.classList.add('popup_opened');
   modalImg.src = evt.target.src;
   modalImg.alt = evt.target.alt;
-  modalCaption.innerHTML = evt.target.alt;
+  modalCaption.textContent = evt.target.alt;
 }
 
-// универсальные ф-ии закрытия/открытия
-const closeButtons = document.querySelectorAll('.popup__button-close');
+// Универсальные ф-ии закрытия/открытия
 
 closeButtons.forEach(button => {
   button.addEventListener('click', () => {
