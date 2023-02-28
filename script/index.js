@@ -61,7 +61,6 @@ const modalImg = document.querySelector('.popup__pic');
 const closeButtons = document.querySelectorAll('.popup__button-close');
 
 //Слушатели
-
 addCardForm.addEventListener('submit', handleAddCardForm);
 
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -82,7 +81,6 @@ profileButtonAdd.addEventListener('click', function () {
 });
 
 //Функция редактирования профиля
-
 userPositionInput.value = positionHTML.textContent;
 userNameInput.value = nameHTML.textContent;
 
@@ -93,7 +91,6 @@ function handleProfileFormSubmit(evt) {
 }
 
 //Код, собирающий карточку:
-
 function getCard(item) {
   const itemTemplate = document.querySelector('#element-template').content;
   const cardItem = itemTemplate.querySelector('.element').cloneNode(true);
@@ -120,18 +117,15 @@ function getCard(item) {
 }
 
 //Код, добавляющий карточки
-
 function createCard(element) {
   const elementTemplate = getCard(element);
   elementsContainer.prepend(elementTemplate);
 }
 
 //Вызов функции, создающей карточки из массива
-
 initialCards.forEach(createCard);
 
 //Передача инфо из импута в карточку добавления изображения
-
 function handleAddCardForm(evt) {
   evt.preventDefault();
   const element = {
@@ -143,7 +137,6 @@ function handleAddCardForm(evt) {
 }
 
 //Присовение значений попапу изображения
-
 function handleImgPopup(evt) {
   imagePopup.classList.add('popup_opened');
   modalImg.src = evt.target.src;
@@ -152,7 +145,6 @@ function handleImgPopup(evt) {
 }
 
 // Универсальные ф-ии закрытия/открытия
-
 closeButtons.forEach(button => {
   button.addEventListener('click', () => {
     const popup = button.closest('.popup');
