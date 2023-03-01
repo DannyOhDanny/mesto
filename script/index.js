@@ -65,15 +65,9 @@ addCardForm.addEventListener('submit', handleAddCardForm);
 
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
-editProfileForm.addEventListener('submit', function () {
-  closePopup(editProfilePopup);
-});
-
-addCardForm.addEventListener('submit', function () {
-  closePopup(addCardPopup);
-});
-
 profileButtonEdit.addEventListener('click', function () {
+  userPositionInput.value = positionHTML.textContent;
+  userNameInput.value = nameHTML.textContent;
   openPopup(editProfilePopup);
 });
 profileButtonAdd.addEventListener('click', function () {
@@ -81,13 +75,12 @@ profileButtonAdd.addEventListener('click', function () {
 });
 
 //Функция редактирования профиля
-userPositionInput.value = positionHTML.textContent;
-userNameInput.value = nameHTML.textContent;
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameHTML.textContent = userNameInput.value;
   positionHTML.textContent = userPositionInput.value;
+  closePopup(editProfilePopup);
 }
 
 //Код, собирающий карточку:
@@ -134,11 +127,12 @@ function handleAddCardForm(evt) {
   };
   createCard(element);
   evt.target.reset();
+  closePopup(addCardPopup);
 }
 
 //Присовение значений попапу изображения
 function handleImgPopup(evt) {
-  imagePopup.classList.add('popup_opened');
+  openPopup(imagePopup);
   modalImg.src = evt.target.src;
   modalImg.alt = evt.target.alt;
   modalCaption.textContent = evt.target.alt;
