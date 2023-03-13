@@ -12,7 +12,7 @@ const hideInputError = (errorElement, errorClassVisible) => {
 
 //Функция проверки валидности импутов
 
-const checkInputValidity = (inputElement, errorClassSample, errorClassVisible) => {
+const checkInputValidity = (inputElement, errorClassVisible) => {
   const errorElement = document.querySelector(`.${inputElement.id}-error`);
   console.log(errorElement);
   if (!inputElement.validity.valid) {
@@ -25,7 +25,6 @@ const checkInputValidity = (inputElement, errorClassSample, errorClassVisible) =
 };
 
 // Ф-ия проверки на валидность полей
-
 const hasInvalidInput = inputList => {
   console.log(inputList);
   return Array.from(inputList).some(inputElement => !inputElement.validity.valid);
@@ -35,10 +34,10 @@ const hasInvalidInput = inputList => {
 
 //Функция слушателей на формы
 
-const setEventListeners = (formElements, inputList, errorClassSample, errorClassVisible) => {
+const setEventListeners = (formElements, inputList, errorClassVisible) => {
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', evt => {
-      checkInputValidity(inputElement, errorClassSample, errorClassVisible);
+      checkInputValidity(inputElement, errorClassVisible);
     });
   });
 
@@ -54,7 +53,7 @@ const setEventListeners = (formElements, inputList, errorClassSample, errorClass
 const enableValidation = config => {
   const inputList = document.querySelectorAll('.popup__input');
   const formElements = document.querySelectorAll('.popup__form');
-  setEventListeners(formElements, inputList, config.errorClassSample, config.errorClassVisible);
+  setEventListeners(formElements, inputList, config.errorClassVisible);
 };
 
 enableValidation({
