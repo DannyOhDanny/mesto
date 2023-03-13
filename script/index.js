@@ -50,17 +50,19 @@ const profileButtonEdit = document.querySelector('.profile__button-edit');
 const profileButtonAdd = document.querySelector('.profile__button-add');
 const nameHTML = document.querySelector('.profile__name');
 const positionHTML = document.querySelector('.profile__position');
-const userNameInput = document.querySelector('.popup__input-name_type_name');
-const userPositionInput = document.querySelector('.popup__input-name_type_position');
-const titleInput = document.querySelector('.popup__input-name_type_heading');
-const urlInput = document.querySelector('.popup__input-name_type_url');
+const userNameInput = document.querySelector('.popup__input_type_name');
+const userPositionInput = document.querySelector('.popup__input_type_position');
+const titleInput = document.querySelector('.popup__input_type_heading');
+const urlInput = document.querySelector('.popup__input_type_url');
 const imagePopup = document.querySelector('#image-popup');
 const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
 const closeButtons = document.querySelectorAll('.popup__button-close');
+popupWindows = document.querySelectorAll('.popup');
 
 //Слушатели
+
 addCardForm.addEventListener('submit', handleAddCardForm);
 
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -70,6 +72,7 @@ profileButtonEdit.addEventListener('click', function () {
   userNameInput.value = nameHTML.textContent;
   openPopup(editProfilePopup);
 });
+
 profileButtonAdd.addEventListener('click', function () {
   openPopup(addCardPopup);
 });
@@ -153,3 +156,23 @@ function closePopup(popup) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
+
+//Закрытие каждого попапа по нажатию на фон попапа.
+
+popupWindows.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    if (evt.target === popup) {
+      closePopup(popup);
+    }
+  });
+});
+
+//Закрытие каждого попапа по нажатию на Esc.
+
+popupWindows.forEach(popup => {
+  document.addEventListener('keydown', evt => {
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    }
+  });
+});

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="./pages/index.css" />
+    <script src="./script/validation.js" defer></script>
     <script src="./script/index.js" defer></script>
     <title>Место</title>
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
@@ -61,52 +62,74 @@
 
     <!--Форма попапа с редактированием-->
     <div class="popup" id="edit-popup">
-      <div class="popup__edit-form">
+      <div class="popup__container">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
-        <form class="popup__form" id="edit-form" name="profile-form">
+        <form class="popup__form" id="edit-form" name="profile-form" novalidate>
           <h2 class="popup__input-title">Редактировать профиль</h2>
-          <input
+          ><input
             name="name"
             placeholder="Имя"
             type="text"
-            class="popup__input-name popup__input-name_type_name"
+            class="popup__input popup__input_type_name"
             value=""
+            minlength="2"
+            maxlength="40"
+            required
+            id="name-input"
+            pattern="^[А-Яа-яЁё\s-]+\D[^0-9]+$"
+            tabindex="1"
           />
+          <span class="popup__error name-input-error" name="error"></span>
           <input
             name="position"
             placeholder="О себе"
             type="text"
-            class="popup__input-name popup__input-name_type_position"
+            class="popup__input popup__input_type_position"
             value=""
+            minlength="2"
+            maxlength="200"
+            required
+            id="position-input"
+            pattern="^[А-Яа-яЁё\s-]+$"
+            tabindex="2"
           />
-          <button class="popup__button-save" type="submit" aria-label="Save">Сохранить</button>
+          <span class="popup__error position-input-error" name="error"></span>
+          <button class="popup__button" type="submit" aria-label="Save">Сохранить</button>
         </form>
       </div>
     </div>
 
     <!--Форма попапа добавления-->
     <div class="popup" id="add-popup">
-      <div class="popup__edit-form">
+      <div class="popup__container">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
-        <form class="popup__form-add" id="add-form" name="card-form">
-          <h2 class="popup__input-title">Новое место</h2>
+        <form class="popup__form" id="add-form" name="card-form" novalidate>
+          <legend class="popup__input-title">Новое место</legend>
           <input
             name="pic-name"
             placeholder="Название"
             type="text"
-            class="popup__input-name popup__input-name_type_heading"
-            value=""
-            onfocus="this.value=''"
+            class="popup__input popup__input_type_heading"
+            required
+            minlength="2"
+            maxlength="30"
+            id="place-input"
+            pattern="^[А-Яа-яЁё\s-]+\D[^0-9]+$"
+            tabindex="1"
           />
+          <span class="popup__error place-input-error" name="error"></span>
           <input
             name="url"
             placeholder="Ссылка на картинку"
-            type="text"
-            class="popup__input-name popup__input-name_type_url"
-            value=""
-            onfocus="this.value=''"
+            type="url"
+            class="popup__input popup__input_type_url"
+            required
+            id="url-input"
+            pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+            tabindex="2"
           />
-          <button class="popup__button-save" type="submit" aria-label="Save">Сохранить</button>
+          <span class="popup__error url-input-error" name="error"></span>
+          <button class="popup__button" type="submit" aria-label="Save">Создать</button>
         </form>
       </div>
     </div>
