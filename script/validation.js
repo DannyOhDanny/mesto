@@ -1,3 +1,5 @@
+//Функция показа текста ошибок
+
 const showInputError = (errorElement, errorMessage, errorClassVisible) => {
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClassVisible);
@@ -21,6 +23,15 @@ const checkInputValidity = (inputElement, errorClassSample, errorClassVisible) =
     console.log('инпут не валиден');
   }
 };
+
+// Ф-ия проверки на валидность полей
+
+const hasInvalidInput = inputList => {
+  console.log(inputList);
+  return Array.from(inputList).some(inputElement => !inputElement.validity.valid);
+};
+
+//Функция блокировки/разблокировки кнопки Submit
 
 //Функция слушателей на формы
 
