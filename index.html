@@ -78,7 +78,7 @@
             id="name-input"
             pattern="^[A-ZА-Яa-zа-яЁё\s-]+\D[^0-9]+$"
           />
-          <span class="popup__error name-input-error" name="error"></span>
+          <span class="popup__error name-input-error"></span>
           <input
             name="position"
             placeholder="О себе"
@@ -91,7 +91,7 @@
             id="position-input"
             pattern="^[A-ZА-Яa-zа-яЁё\s-]+\D[^0-9]+$"
           />
-          <span class="popup__error position-input-error" name="error"></span>
+          <span class="popup__error position-input-error"></span>
           <button class="popup__button" type="submit" aria-label="Save">Сохранить</button>
         </form>
       </div>
@@ -102,7 +102,7 @@
       <div class="popup__container">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
         <form class="popup__form" id="add-form" name="card-form" novalidate>
-          <legend class="popup__input-title">Новое место</legend>
+          <h2 class="popup__input-title">Новое место</h2>
           <input
             name="pic-name"
             placeholder="Название"
@@ -114,7 +114,7 @@
             id="place-input"
             pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё\s]+\D+$"
           />
-          <span class="popup__error place-input-error" name="error"></span>
+          <span class="popup__error place-input-error"></span>
           <input
             name="url"
             placeholder="Ссылка на картинку"
@@ -124,7 +124,7 @@
             id="url-input"
             pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$"
           />
-          <span class="popup__error url-input-error" name="error"></span>
+          <span class="popup__error url-input-error"></span>
           <button class="popup__button" type="submit" aria-label="Save">Создать</button>
         </form>
       </div>
@@ -135,7 +135,7 @@
       <div class="popup__img-container">
         <button class="popup__button-close" type="button" aria-label="Close"></button>
         <figure class="popup__image">
-          <image class="popup__pic"></image>
+          <img class="popup__pic"></img>
           <figcaption class="popup__title"></figcaption>
         </figure>
       </div>
