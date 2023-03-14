@@ -76,8 +76,7 @@
             maxlength="40"
             required
             id="name-input"
-            pattern="^[А-Яа-яЁё\s-]+\D[^0-9]+$"
-            tabindex="1"
+            pattern="^[A-ZА-Яa-zа-яЁё\s-]+\D[^0-9]+$"
           />
           <span class="popup__error name-input-error" name="error"></span>
           <input
@@ -90,8 +89,7 @@
             maxlength="200"
             required
             id="position-input"
-            pattern="^[А-Яа-яЁё\s-]+$"
-            tabindex="2"
+            pattern="^[A-ZА-Яa-zа-яЁё\s-]+\D[^0-9]+$"
           />
           <span class="popup__error position-input-error" name="error"></span>
           <button class="popup__button" type="submit" aria-label="Save">Сохранить</button>
@@ -114,8 +112,7 @@
             minlength="2"
             maxlength="30"
             id="place-input"
-            pattern="^[А-Яа-яЁё\s-]+\D[^0-9]+$"
-            tabindex="1"
+            pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё\s]+\D+$"
           />
           <span class="popup__error place-input-error" name="error"></span>
           <input
@@ -126,7 +123,6 @@
             required
             id="url-input"
             pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$"
-            tabindex="2"
           />
           <span class="popup__error url-input-error" name="error"></span>
           <button class="popup__button" type="submit" aria-label="Save">Создать</button>
