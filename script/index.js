@@ -59,7 +59,7 @@ const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
 const closeButtons = document.querySelectorAll('.popup__button-close');
-popupWindows = document.querySelectorAll('.popup');
+const popupWindows = document.querySelectorAll('.popup');
 
 //Слушатели
 
