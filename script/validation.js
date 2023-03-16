@@ -35,6 +35,10 @@ const setEventListeners = (formElement, settings) => {
 
   toggleButtonState(inputList, buttonElement, settings);
 
+  formElement.addEventListener('reset', () => {
+    disableSubmitButton(buttonElement, settings);
+  });
+
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', evt => {
       checkInputValidity(formElement, inputElement, settings);
@@ -65,6 +69,7 @@ const hasInvalidInput = inputList => {
 //Функция блокировки/разблокировки кнопки Submit
 
 const toggleButtonState = (inputList, buttonElement, settings) => {
+  disableSubmitButton(buttonElement, settings);
   if (!hasInvalidInput(inputList)) {
     enableSubmitButton(buttonElement, settings);
   } else {

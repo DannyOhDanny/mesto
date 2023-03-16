@@ -1,5 +1,4 @@
 // Исходный массив
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -58,7 +57,6 @@ const imagePopup = document.querySelector('#image-popup');
 const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
-//const closeButtons = document.querySelectorAll('.popup__button-close');
 const popupWindows = document.querySelectorAll('.popup');
 
 //Слушатели
@@ -95,7 +93,7 @@ function getCard(item) {
   const likeButton = cardItem.querySelector('.element__heart');
   const cardHeading = cardItem.querySelector('.element__title');
 
-  cardPicture.addEventListener('click', handleImgPopup);
+  cardPicture.addEventListener('click', cardItem => handleImgPopup(cardItem));
 
   deleteButton.addEventListener('click', function (evt) {
     cardItem.remove();
