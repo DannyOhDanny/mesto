@@ -58,7 +58,7 @@ const imagePopup = document.querySelector('#image-popup');
 const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
-const closeButtons = document.querySelectorAll('.popup__button-close');
+//const closeButtons = document.querySelectorAll('.popup__button-close');
 const popupWindows = document.querySelectorAll('.popup');
 
 //Слушатели
@@ -141,38 +141,34 @@ function handleImgPopup(evt) {
   modalCaption.textContent = evt.target.alt;
 }
 
-// Универсальные ф-ии закрытия/открытия
-closeButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const popup = button.closest('.popup');
-    closePopup(popup);
-  });
-});
-
+//Функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
+//Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeByEscape);
 }
 
-//Закрытие каждого попапа по нажатию на фон попапа.
-
+//Закрытие каждого попапа по нажатию на фон попапа и на кнопку-крестик.
 popupWindows.forEach(popup => {
-  popup.addEventListener('click', evt => {
-    if (evt.target === popup) {
+  popup.addEventListener('mousedown', evt => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains('popup__button-close')) {
       closePopup(popup);
     }
   });
 });
 
 //Закрытие каждого попапа по нажатию на Esc.
-
-popupWindows.forEach(popup => {
-  document.addEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
-      closePopup(popup);
-    }
-  });
-});
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
