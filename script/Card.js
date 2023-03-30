@@ -38,6 +38,11 @@ const dataList = [
   }
 ];
 
+const imagePopup = document.querySelector('#image-popup');
+const modalCaption = document.querySelector('.popup__title');
+const modalImg = document.querySelector('.popup__pic');
+//const popupButtonClose = document.querySelector('.popup__button-close');
+
 class Card {
   constructor(data, templateSelector) {
     this._title = data.name;
@@ -58,12 +63,36 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._setEventListeners();
 
     this._element.querySelector('.element__title').textContent = this._title;
     this._element.querySelector('.element__pic').src = `${this._link}`;
     this._element.querySelector('.element__pic').alt = `${this._title}`;
 
     return this._element;
+  }
+
+  _handleOpenPopup() {
+    modalImg.src = this._link;
+    modalImg.alt = `${this._title}`;
+    modalCaption.textContent = `${this._title}`;
+    imagePopup.classList.add('popup_opened');
+  }
+
+  _handleClosePopup() {
+    modalImg.src = '';
+    modalCaption.textContent = '';
+    imagePopup.classList.remove('popup_opened');
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.element__pic').addEventListener('click', () => {
+      this._handleOpenPopup();
+    });
+
+    imagePopup.querySelector('.popup__button-close').addEventListener('click', () => {
+      this._handleClosePopup();
+    });
   }
 }
 
