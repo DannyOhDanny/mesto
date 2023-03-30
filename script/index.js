@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 // Исходный массив
 const initialCards = [
   {
