@@ -1,6 +1,7 @@
 import { Card } from './Card.js';
 
 // Исходный массив
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -141,16 +142,16 @@ function handleImgPopup(evt) {
   modalCaption.textContent = evt.target.alt;
 }
 
-//Функция закрытия попапа
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-}
-
 //Функция открытия попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
+}
+
+//Функция закрытия попапа
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 //Закрытие каждого попапа по нажатию на фон попапа и на кнопку-крестик.
@@ -172,3 +173,10 @@ function closeByEscape(evt) {
     closePopup(openedPopup);
   }
 }
+
+//Добавление готовых карточек в document через Класс Card.
+initialCards.forEach(item => {
+  const card = new Card(item, '#element-template');
+  const cardElement = card.generateCard();
+  document.querySelector('.elements').append(cardElement);
+});
