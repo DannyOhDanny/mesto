@@ -1,4 +1,5 @@
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
 
 // Исходный массив
 
@@ -120,7 +121,7 @@ function createCard(element) {
 }
 
 //Вызов функции, создающей карточки из массива
-initialCards.forEach(createCard);
+/*initialCards.forEach(createCard);*/
 
 //Передача инфо из импута в карточку добавления изображения
 function handleAddCardForm(evt) {
@@ -179,4 +180,20 @@ initialCards.forEach(item => {
   const card = new Card(item, '#element-template');
   const cardElement = card.generateCard();
   document.querySelector('.elements').append(cardElement);
+});
+
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+const formList = Array.from(document.querySelectorAll('.popup__form'));
+
+formList.forEach(form => {
+  const formElement = new FormValidator(settings, form);
+  formElement.enableValidation();
 });

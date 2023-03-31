@@ -34,9 +34,7 @@ class Card {
     this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
   }
 
-  _closeByEscape() {}
-
-  _createOpenPopup() {
+  _createImgPopup() {
     document.querySelector('.popup__pic').src = this._link;
     document.querySelector('.popup__pic').alt = `${this._title}`;
     document.querySelector('.popup__title').textContent = `${this._title}`;
@@ -44,14 +42,16 @@ class Card {
   }
 
   _closePopup() {
-    document.querySelector('.popup__pic').src = '';
-    document.querySelector('.popup__title').textContent = '';
-    document.querySelector('#image-popup').classList.remove('popup_opened');
+    if (document.querySelector('#image-popup').classList.contains('popup_opened')) {
+      document.querySelector('.popup__pic').src = '';
+      document.querySelector('.popup__title').textContent = '';
+      document.querySelector('#image-popup').classList.remove('popup_opened');
+    }
   }
 
   _setEventListeners() {
     this._element.querySelector('.element__pic').addEventListener('click', () => {
-      this._createOpenPopup();
+      this._createImgPopup();
     });
 
     document
