@@ -1,3 +1,4 @@
+//Класс FormValidator , осуществляющий валидацию форм на странице
 class FormValidator {
   constructor(settings, formElement) {
     this.settings = settings;
@@ -83,4 +84,5 @@ class FormValidator {
   }
 }
 
+//Экспорт класса
 export { FormValidator };

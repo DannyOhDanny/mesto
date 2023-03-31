@@ -1,4 +1,4 @@
-// Исходный массив
+// Класс Card, создающий карточки по конструктору из массива.
 class Card {
   constructor(data, templateSelector) {
     this._title = data.name;
@@ -71,4 +71,5 @@ class Card {
   }
 }
 
+//Экспорт класса
 export { Card };

@@ -1,8 +1,9 @@
+// Импорт классов в файл index.js
+
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
 // Исходный массив
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -42,8 +43,17 @@ const initialCards = [
   }
 ];
 
-// Константы
+// Объект- конфигуратор со свойствами
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
+// Константы
 const elementsContainer = document.querySelector('.elements');
 const editProfileForm = document.forms['profile-form'];
 const addCardForm = document.forms['card-form'];
@@ -62,9 +72,9 @@ const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
 const popupWindows = document.querySelectorAll('.popup');
+const formList = Array.from(document.querySelectorAll('.popup__form'));
 
 //Слушатели
-
 addCardForm.addEventListener('submit', handleAddCardForm);
 
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -80,7 +90,6 @@ profileButtonAdd.addEventListener('click', function () {
 });
 
 //Функция редактирования профиля
-
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   nameHTML.textContent = userNameInput.value;
@@ -115,6 +124,7 @@ function getCard(item) {
 }
 
 //Код, добавляющий карточки
+
 function createCard(element) {
   const elementTemplate = getCard(element);
   elementsContainer.prepend(elementTemplate);
@@ -182,17 +192,7 @@ initialCards.forEach(item => {
   document.querySelector('.elements').append(cardElement);
 });
 
-const settings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-const formList = Array.from(document.querySelectorAll('.popup__form'));
-
+//Добавление валидации для всех форм.
 formList.forEach(form => {
   const formElement = new FormValidator(settings, form);
   formElement.enableValidation();
