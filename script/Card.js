@@ -72,14 +72,22 @@ class Card {
     return this._element;
   }
 
-  _handleOpenPopup() {
+  _removeCard() {
+    this._element.remove();
+  }
+
+  _isLiked() {
+    this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
+  }
+
+  _createOpenPopup() {
     modalImg.src = this._link;
     modalImg.alt = `${this._title}`;
     modalCaption.textContent = `${this._title}`;
     imagePopup.classList.add('popup_opened');
   }
 
-  _handleClosePopup() {
+  _closePopup() {
     modalImg.src = '';
     modalCaption.textContent = '';
     imagePopup.classList.remove('popup_opened');
@@ -87,11 +95,19 @@ class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__pic').addEventListener('click', () => {
-      this._handleOpenPopup();
+      this._createOpenPopup();
     });
 
     imagePopup.querySelector('.popup__button-close').addEventListener('click', () => {
-      this._handleClosePopup();
+      this._closePopup();
+    });
+
+    this._element.querySelector('.element__delete-btn').addEventListener('click', () => {
+      this._removeCard();
+    });
+
+    this._element.querySelector('.element__heart').addEventListener('click', () => {
+      this._isLiked();
     });
   }
 }
