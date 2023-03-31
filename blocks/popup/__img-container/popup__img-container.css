@@ -4,5 +4,6 @@
   margin: 0;
   outline: none;
   display: flex;
-  box-sizing: border-box;
+  line-height: 14px;
+  font-size: 14px;
 }

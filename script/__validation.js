@@ -1,4 +1,4 @@
-//Функция показа текста ошибок
+/*//Функция показа текста ошибок
 
 const showInputError = (formElement, inputElement, errorMessage, errorClass) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -98,3 +98,4 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 });
+*/
