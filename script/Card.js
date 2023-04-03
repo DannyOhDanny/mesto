@@ -16,13 +16,26 @@ class Card {
   }
 
   generateCard() {
+    //Шаблон
     this._element = this._getTemplate();
+    //Объявление переменных
+    this._cardTitle = this._element.querySelector('.element__title');
+    this._cardImage = this._element.querySelector('.element__pic');
+    this._likeButton = this._element.querySelector('.element__heart');
+    this._deleteButton = this._element.querySelector('.element__delete-btn');
+    this._popupElement = document.querySelector('#image-popup');
+    this._popupImage = document.querySelector('.popup__pic');
+    this._popupTitle = document.querySelector('.popup__title');
+
+    //Вызов  this._setEventListeners(); должен быть после объявления классовой переменной, чтобы в нём она была доступна.
     this._setEventListeners();
 
-    this._element.querySelector('.element__title').textContent = this._title;
-    this._element.querySelector('.element__pic').src = `${this._link}`;
-    this._element.querySelector('.element__pic').alt = `${this._title}`;
+    // Присвоение значений карточке
+    this._cardTitle.textContent = this._title;
+    this._cardImage.src = `${this._link}`;
+    this._cardImage.alt = `${this._title}`;
 
+    // Возврат карточки
     return this._element;
   }
 
@@ -31,41 +44,26 @@ class Card {
   }
 
   _isLiked() {
-    this._element.querySelector('.element__heart').classList.toggle('element__heart_active');
+    this._likeButton.classList.toggle('element__heart_active');
   }
 
   _createImgPopup() {
-    document.querySelector('.popup__pic').src = this._link;
-    document.querySelector('.popup__pic').alt = `${this._title}`;
-    document.querySelector('.popup__title').textContent = `${this._title}`;
-    document.querySelector('#image-popup').classList.add('popup_opened');
-  }
-
-  _closePopup() {
-    if (document.querySelector('#image-popup').classList.contains('popup_opened')) {
-      document.querySelector('.popup__pic').src = '';
-      document.querySelector('.popup__title').textContent = '';
-      document.querySelector('#image-popup').classList.remove('popup_opened');
-    }
+    this._popupImage.src = this._link;
+    this._popupImage.alt = `${this._title}`;
+    this._popupTitle.textContent = `${this._title}`;
+    this._popupElement.classList.add('popup_opened');
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__pic').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._createImgPopup();
     });
 
-    document
-      .querySelector('#image-popup')
-      .querySelector('.popup__button-close')
-      .addEventListener('click', () => {
-        this._closePopup();
-      });
-
-    this._element.querySelector('.element__delete-btn').addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
       this._removeCard();
     });
 
-    this._element.querySelector('.element__heart').addEventListener('click', () => {
+    this._likeButton.addEventListener('click', () => {
       this._isLiked();
     });
   }
