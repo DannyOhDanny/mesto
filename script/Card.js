@@ -1,10 +1,11 @@
 // Класс Card, создающий карточки по конструктору из массива.
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._title = data.name;
     this._link = data.link;
     this._alt = data.name;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -47,16 +48,9 @@ class Card {
     this._likeButton.classList.toggle('element__heart_active');
   }
 
-  _createImgPopup() {
-    this._popupImage.src = this._link;
-    this._popupImage.alt = `${this._title}`;
-    this._popupTitle.textContent = `${this._title}`;
-    this._popupElement.classList.add('popup_opened');
-  }
-
   _setEventListeners() {
     this._cardImage.addEventListener('click', () => {
-      this._createImgPopup();
+      this._handleCardClick(this._title, this._link);
     });
 
     this._deleteButton.addEventListener('click', () => {

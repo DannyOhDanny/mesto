@@ -74,7 +74,7 @@
             maxlength="40"
             required
             id="name-input"
-            pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё\s]+\D+$"
+            pattern="^[A-ZА-ЯЁ-a-zа-яё\s]+\D+$"
           />
           <span class="popup__error name-input-error"></span>
           <input
@@ -87,7 +87,7 @@
             maxlength="200"
             required
             id="position-input"
-            pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё\s]+\D+$"
+            pattern="^[A-ZА-ЯЁ-a-zа-яё\s]+\D+$"
           />
           <span class="popup__error position-input-error"></span>
           <button class="popup__button" type="submit" aria-label="Save">Сохранить</button>
@@ -110,7 +110,7 @@
             minlength="2"
             maxlength="30"
             id="place-input"
-            pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё\s]+\D+$"
+            pattern="^[A-ZА-ЯЁ-a-zа-яё\s]+\D+$"
           />
           <span class="popup__error place-input-error"></span>
           <input

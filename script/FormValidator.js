@@ -35,6 +35,14 @@ class FormValidator {
     }
   }
 
+  //Функиця очищения ошибок импута
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach(inputElement => {
+      this._hideInputError(inputElement);
+    });
+  }
+
   _disableSubmitButton() {
     this._submit.classList.add(this.settings.inactiveButtonClass);
     this._submit.setAttribute('disabled', true);

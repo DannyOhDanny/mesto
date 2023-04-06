@@ -74,19 +74,22 @@ const modalImg = document.querySelector('.popup__pic');
 const popupWindows = document.querySelectorAll('.popup');
 const formList = Array.from(document.querySelectorAll('.popup__form'));
 
-//Слушатели
+//Слушатели на формы
 addCardForm.addEventListener('submit', handleAddCardForm);
 
 editProfileForm.addEventListener('submit', handleProfileFormSubmit);
 
+//Слушатели на иконки форм
 profileButtonEdit.addEventListener('click', function () {
   userPositionInput.value = positionHTML.textContent;
   userNameInput.value = nameHTML.textContent;
   openPopup(editProfilePopup);
+  editProfileFormPopup.resetValidation();
 });
 
 profileButtonAdd.addEventListener('click', function () {
   openPopup(addCardPopup);
+  addCardFormPopup.resetValidation();
 });
 
 //Функция редактирования профиля
@@ -97,7 +100,7 @@ function handleProfileFormSubmit(evt) {
   closePopup(editProfilePopup);
 }
 
-//Код, собирающий карточку:
+/*//Код, собирающий карточку:
 function getCard(item) {
   const itemTemplate = document.querySelector('#element-template').content;
   const cardItem = itemTemplate.querySelector('.element').cloneNode(true);
@@ -121,14 +124,7 @@ function getCard(item) {
   cardPicture.setAttribute('alt', item.name);
 
   return cardItem;
-}
-
-//Код, добавляющий карточки
-
-function createCard(element) {
-  const elementTemplate = getCard(element);
-  elementsContainer.prepend(elementTemplate);
-}
+}*/
 
 //Вызов функции, создающей карточки из массива
 /*initialCards.forEach(createCard);*/
@@ -140,17 +136,25 @@ function handleAddCardForm(evt) {
     name: titleInput.value,
     link: urlInput.value
   };
-  createCard(element);
+  addCard(element);
   evt.target.reset();
   closePopup(addCardPopup);
 }
 
 //Присовение значений попапу изображения
-function handleImgPopup(evt) {
+
+/*function handleImgPopup(evt) {
   openPopup(imagePopup);
   modalImg.src = evt.target.src;
   modalImg.alt = evt.target.alt;
   modalCaption.textContent = evt.target.alt;
+}*/
+
+function handleCardClick(name, link) {
+  modalImg.src = link;
+  modalImg.alt = name;
+  modalCaption.textContent = name;
+  openPopup(imagePopup);
 }
 
 //Функция открытия попапа
@@ -185,9 +189,22 @@ function closeByEscape(evt) {
   }
 }
 
-//Добавление готовых карточек в document через Класс Card.
+//Добавление новых карточек в document через Класс Card.
+
+function createCardElement(item) {
+  const card = new Card(item, '#element-template', handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+//Код, добавляющий карточки в DOM
+function addCard(element) {
+  const elementTemplate = createCardElement(element);
+  elementsContainer.prepend(elementTemplate);
+}
+
+//Добавление готовых карточек из массива в document через класс Card.
 initialCards.forEach(item => {
-  const card = new Card(item, '#element-template');
+  const card = new Card(item, '#element-template', handleCardClick);
   const cardElement = card.generateCard();
   document.querySelector('.elements').append(cardElement);
 });
@@ -197,3 +214,7 @@ formList.forEach(form => {
   const formElement = new FormValidator(settings, form);
   formElement.enableValidation();
 });
+
+//Объявление новых индивидуальных переменных к формам через класс
+const editProfileFormPopup = new FormValidator(settings, document.forms['profile-form']);
+const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);
