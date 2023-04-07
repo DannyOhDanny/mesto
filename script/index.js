@@ -68,11 +68,9 @@ const userPositionInput = document.querySelector('.popup__input_type_position');
 const titleInput = document.querySelector('.popup__input_type_heading');
 const urlInput = document.querySelector('.popup__input_type_url');
 const imagePopup = document.querySelector('#image-popup');
-const imageHTML = document.querySelector('.element__pic');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
 const popupWindows = document.querySelectorAll('.popup');
-const formList = Array.from(document.querySelectorAll('.popup__form'));
 
 //Слушатели на формы
 addCardForm.addEventListener('submit', handleAddCardForm);
@@ -196,25 +194,22 @@ function createCardElement(item) {
   const cardElement = card.generateCard();
   return cardElement;
 }
-//Код, добавляющий карточки в DOM
+//Код, добавляющий любые карточки в DOM
 function addCard(element) {
   const elementTemplate = createCardElement(element);
   elementsContainer.prepend(elementTemplate);
 }
 
-//Добавление готовых карточек из массива в document через класс Card.
+//Добавление готовых карточек из массива в document через функции
+
 initialCards.forEach(item => {
-  const card = new Card(item, '#element-template', handleCardClick);
-  const cardElement = card.generateCard();
-  document.querySelector('.elements').append(cardElement);
+  createCardElement(item);
+  addCard(item);
 });
 
-//Добавление валидации для всех форм.
-formList.forEach(form => {
-  const formElement = new FormValidator(settings, form);
-  formElement.enableValidation();
-});
-
-//Объявление новых индивидуальных переменных к формам через класс
-const editProfileFormPopup = new FormValidator(settings, document.forms['profile-form']);
+//Объявление новых индивидуальных переменных к формам через класс и активация валидации импутов к ним.
 const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);
+addCardFormPopup.enableValidation();
+
+const editProfileFormPopup = new FormValidator(settings, document.forms['profile-form']);
+editProfileFormPopup.enableValidation();
