@@ -1,6 +1,7 @@
 // Импорт классов в файл index.js
 
 import { Card } from './Card.js';
+import Section from './Section.js';
 import { FormValidator } from './FormValidator.js';
 
 // Исходный массив
@@ -71,6 +72,7 @@ const imagePopup = document.querySelector('#image-popup');
 const modalCaption = document.querySelector('.popup__title');
 const modalImg = document.querySelector('.popup__pic');
 const popupWindows = document.querySelectorAll('.popup');
+const cardSection = '.elements';
 
 //Слушатели на формы
 addCardForm.addEventListener('submit', handleAddCardForm);
@@ -194,6 +196,7 @@ function createCardElement(item) {
   const cardElement = card.generateCard();
   return cardElement;
 }
+
 //Код, добавляющий любые карточки в DOM
 function addCard(element) {
   const elementTemplate = createCardElement(element);
@@ -201,11 +204,27 @@ function addCard(element) {
 }
 
 //Добавление готовых карточек из массива в document через функции
-
+/*
 initialCards.forEach(item => {
   createCardElement(item);
   addCard(item);
 });
+*/
+
+//Добавление готовых карточек из массива в document через класс Section
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: cardItem => {
+      const card = new Card(cardItem, '#element-template', handleCardClick);
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    }
+  },
+  cardSection
+);
+
+cardList.renderItems();
 
 //Объявление новых индивидуальных переменных к формам через класс и активация валидации импутов к ним.
 const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);
