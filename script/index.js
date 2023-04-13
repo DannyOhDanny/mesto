@@ -1,8 +1,9 @@
 // Импорт классов в файл index.js
 
-import { Card } from './Card.js';
+import Card from './Card.js';
 import Section from './Section.js';
-import { FormValidator } from './FormValidator.js';
+import FormValidator from './FormValidator.js';
+import PopupWithImage from './PopupWithImage.js';
 
 // Исходный массив
 const initialCards = [
@@ -68,9 +69,6 @@ const userNameInput = document.querySelector('.popup__input_type_name');
 const userPositionInput = document.querySelector('.popup__input_type_position');
 const titleInput = document.querySelector('.popup__input_type_heading');
 const urlInput = document.querySelector('.popup__input_type_url');
-const imagePopup = document.querySelector('#image-popup');
-const modalCaption = document.querySelector('.popup__title');
-const modalImg = document.querySelector('.popup__pic');
 const popupWindows = document.querySelectorAll('.popup');
 const cardSection = '.elements';
 
@@ -126,8 +124,8 @@ function getCard(item) {
   return cardItem;
 }*/
 
-//Вызов функции, создающей карточки из массива
-/*initialCards.forEach(createCard);*/
+/*//Вызов функции, создающей карточки из массива
+initialCards.forEach(createCard);*/
 
 //Передача инфо из импута в карточку добавления изображения
 function handleAddCardForm(evt) {
@@ -141,21 +139,13 @@ function handleAddCardForm(evt) {
   closePopup(addCardPopup);
 }
 
-//Присовение значений попапу изображения
-
-/*function handleImgPopup(evt) {
+/*//Присовение значений попапу изображения
+function handleImgPopup(evt) {
   openPopup(imagePopup);
   modalImg.src = evt.target.src;
   modalImg.alt = evt.target.alt;
   modalCaption.textContent = evt.target.alt;
 }*/
-
-function handleCardClick(name, link) {
-  modalImg.src = link;
-  modalImg.alt = name;
-  modalCaption.textContent = name;
-  openPopup(imagePopup);
-}
 
 //Функция открытия попапа
 function openPopup(popup) {
@@ -189,8 +179,12 @@ function closeByEscape(evt) {
   }
 }
 
-//Добавление новых карточек в document через Класс Card.
+// функция вызова готового popupOpenImage:
+function handleCardClick(title, link) {
+  popupOpenImage.open(title, link);
+}
 
+//Добавление новых карточек в document через Класс Card.
 function createCardElement(item) {
   const card = new Card(item, '#element-template', handleCardClick);
   const cardElement = card.generateCard();
@@ -203,13 +197,11 @@ function addCard(element) {
   elementsContainer.prepend(elementTemplate);
 }
 
-//Добавление готовых карточек из массива в document через функции
-/*
+/*//Добавление готовых карточек из массива в document через функции
 initialCards.forEach(item => {
   createCardElement(item);
   addCard(item);
-});
-*/
+});*/
 
 //Добавление готовых карточек из массива в document через класс Section
 const cardList = new Section(
@@ -225,6 +217,10 @@ const cardList = new Section(
 );
 
 cardList.renderItems();
+
+//Объявление класса PopupOpenImage с открывающимся изображением
+const popupOpenImage = new PopupWithImage('#image-popup');
+popupOpenImage.setEventListeners();
 
 //Объявление новых индивидуальных переменных к формам через класс и активация валидации импутов к ним.
 const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);

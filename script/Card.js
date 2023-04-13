@@ -1,5 +1,5 @@
 // Класс Card, создающий карточки по конструктору из массива.
-class Card {
+export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._title = data.name;
     this._link = data.link;
@@ -7,7 +7,7 @@ class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
-
+  //Создаем шаблон карточки
   _getTemplate() {
     const cardElement = document
       .querySelector(this._templateSelector)
@@ -33,35 +33,34 @@ class Card {
 
     // Присвоение значений карточке
     this._cardTitle.textContent = this._title;
-    this._cardImage.src = `${this._link}`;
     this._cardImage.alt = `${this._title}`;
+    this._cardImage.src = `${this._link}`;
 
     // Возврат карточки
     return this._element;
   }
-
+  // Удалить карточки
   _removeCard() {
     this._element.remove();
   }
-
+  // Лайкнуть карточку
   _isLiked() {
     this._likeButton.classList.toggle('element__heart_active');
   }
 
+  //Слушатели на клик по изображению, корзине, лайку:
   _setEventListeners() {
+    //Слушател на картинку
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._title, this._link);
     });
-
+    //Слушател на кнопку удаления
     this._deleteButton.addEventListener('click', () => {
       this._removeCard();
     });
-
+    // Слушатель на кнопку лайка
     this._likeButton.addEventListener('click', () => {
       this._isLiked();
     });
   }
 }
-
-//Экспорт класса
-export { Card };
