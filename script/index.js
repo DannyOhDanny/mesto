@@ -1,4 +1,4 @@
-// Импорт классов в файл index.js
+//Импорт классов в файл index.js
 import Card from './Card.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
@@ -6,7 +6,7 @@ import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
 
-// Исходный массив
+//Исходный массив
 const initialCards = [
   {
     name: 'Архыз',
@@ -46,7 +46,7 @@ const initialCards = [
   }
 ];
 
-// Объект - конфигуратор со свойствами селекторов и классов
+//Объект - конфигуратор со свойствами селекторов и классов
 const settings = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -56,7 +56,7 @@ const settings = {
   errorClass: 'popup__error_visible'
 };
 
-// Константы
+//Константы
 const elementsContainer = document.querySelector('.elements');
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const profileButtonAdd = document.querySelector('.profile__button-add');
@@ -168,25 +168,25 @@ initialCards.forEach(item => {
   addCard(item);
 });*/
 
-// Функция вызова готового попапа по клику на изображение
+//Функция вызова готового попапа по клику на изображение
 function handleCardClick(title, link) {
   popupOpenImage.open(title, link);
 }
 
-//Добавление новых карточек в document через Класс Card(работает)
+//Добавление новых карточек в document через Класс Card
 function createCardElement(item) {
   const card = new Card(item, '#element-template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
-//Код, добавляющий любые карточки в DOM (работает)
+//Код, добавляющий любые карточки в DOM
 function addCard(element) {
   const elementTemplate = createCardElement(element);
   elementsContainer.prepend(elementTemplate);
 }
 
-//Добавление готовых карточек из массива в document через класс Section (работает)
+//Добавление готовых карточек из массива в document через класс Section
 const cardList = new Section(
   {
     items: initialCards,
@@ -198,17 +198,17 @@ const cardList = new Section(
   },
   cardSection
 );
-
+//Вызов рендера карточек
 cardList.renderItems();
 
-//Объявление новых индивидуальных переменных к формам через класс и активация валидации импутов к ним
+//Вызов класса FormValidator для попапов и активация валидации импутов к ним
 const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);
 addCardFormPopup.enableValidation();
 
 const editProfileFormPopup = new FormValidator(settings, document.forms['profile-form']);
 editProfileFormPopup.enableValidation();
 
-//Вызываем класс UserInfo с селекторами
+//Вызов класса UserInfo с селекторами
 const userProfileInfo = new UserInfo({
   usernameSelector: '.profile__name',
   userinfoSelector: '.profile__position'
@@ -223,10 +223,8 @@ popupOpenImage.setEventListeners();
 //Вызываем класс PopupWithForm с селекторами и колбэком
 const popupEditProfile = new PopupWithForm('#edit-popup', {
   callbackSubmit: userData => {
-    userProfileInfo.setUserInfo({
-      username: userData.name,
-      userinfo: userData.position
-    });
+    const newInfo = { username: userData.name, userinfo: userData.position };
+    userProfileInfo.setUserInfo(newInfo);
     popupEditProfile.close();
   }
 });
@@ -239,14 +237,14 @@ profileButtonEdit.addEventListener('click', function () {
   userPositionInput.value = userProfileInfo.getUserInfo().userinfo;
 });
 
-//3.Попап добавления карточки
+//3.Попап добавления карточки PopupWithFor
 const popupAddCard = new PopupWithForm('#add-popup', {
   callbackSubmit: () => {
-    const newElement = {
+    const newCard = {
       name: titleInput.value,
       link: urlInput.value
     };
-    addCard(newElement);
+    addCard(newCard);
     popupAddCard.close();
   }
 });
