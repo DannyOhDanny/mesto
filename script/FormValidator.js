@@ -12,6 +12,7 @@ export default class FormValidator {
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     console.log(errorElement);
+    inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     console.log(errorElement.textContent);
     errorElement.classList.add(this._errorClass);
@@ -21,6 +22,7 @@ export default class FormValidator {
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     console.log(errorElement);
+    inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this.errorClass);
     errorElement.textContent = '';
   }
@@ -67,7 +69,7 @@ export default class FormValidator {
       this._disableSubmitButton();
     }
   }
-  //Слушатели на кно
+  //Слушатели
   _setEventListeners() {
     //Блокируем кнопку
     this._toggleButtonState();
