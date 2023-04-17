@@ -11,17 +11,17 @@ export default class FormValidator {
   //Показываем сообщение об ошибке
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    console.log(errorElement);
+    //console.log(errorElement);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
-    console.log(errorElement.textContent);
+    //console.log(errorElement.textContent);
     errorElement.classList.add(this._errorClass);
-    console.log(errorElement.classList);
+    //console.log(errorElement.classList);
   }
   //Скрываем сообщение об ошибке
   _hideInputError = inputElement => {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    console.log(errorElement);
+    //console.log(errorElement);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this.errorClass);
     errorElement.textContent = '';
@@ -30,10 +30,10 @@ export default class FormValidator {
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
-      console.log('импут не валиден');
+      //console.log('импут не валиден');
     } else {
       this._hideInputError(inputElement);
-      console.log('импут валиден');
+      //console.log('импут валиден');
     }
   }
 

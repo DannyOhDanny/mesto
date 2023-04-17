@@ -1,12 +1,13 @@
 .popup__error {
   display: block;
-  padding: 0px 36px 13px 36px;
+  padding: 0px 36px 0px 36px;
   visibility: hidden;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.25;
+  min-height: 36px;
   color: #ff0000;
   border: none;
 }

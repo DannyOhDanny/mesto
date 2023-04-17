@@ -1,4 +1,6 @@
 .popup__error_visible {
   visibility: visible;
   margin: 0;
+  display: block;
+  min-height: 36px;
 }

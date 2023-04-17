@@ -42,6 +42,7 @@ export default class Card {
   // Удалить карточки
   _removeCard = () => {
     this._element.remove();
+    this._element = null;
   };
   // Лайкнуть карточку
   _isLiked = () => {
