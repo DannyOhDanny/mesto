@@ -1,10 +1,18 @@
+// Импорт стилей CSS
+import './index.css';
+
 //Импорт классов в файл index.js
-import Card from './Card.js';
-import Section from './Section.js';
-import FormValidator from './FormValidator.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+import Card from '../script/Card.js';
+import Section from '../script/Section.js';
+import FormValidator from '../script/FormValidator.js';
+import PopupWithImage from '../script/PopupWithImage.js';
+import PopupWithForm from '../script/PopupWithForm.js';
+import UserInfo from '../script/UserInfo.js';
+
+// Импорт картинок
+const solnechnogorsk = new URL('../images/element_pic-4.jpg', import.meta.url);
+const kurshskayaKosa = new URL('../images/element_pic-5.jpg', import.meta.url);
+const vyborg = new URL('../images/element_pic-6.jpg', import.meta.url);
 
 //Исходный массив
 const initialCards = [
@@ -34,15 +42,15 @@ const initialCards = [
   },
   {
     name: 'Солнечногорск',
-    link: 'https://dannyohdanny.github.io/mesto/images/element_pic-4.jpg'
+    link: solnechnogorsk
   },
   {
     name: 'Куршская коса',
-    link: 'https://dannyohdanny.github.io/mesto/images/element_pic-5.jpg'
+    link: kurshskayaKosa
   },
   {
     name: 'Выборг',
-    link: 'https://dannyohdanny.github.io/mesto/images/element_pic-6.jpg'
+    link: vyborg
   }
 ];
 
@@ -134,9 +142,9 @@ function handleImgPopup(evt) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
-}
+}*/
 
-/*Функция закрытия попапа(на удаление)
+/* //Функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
@@ -231,13 +239,13 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
 //Навешиваем слушатели на попап
 popupEditProfile.setEventListeners();
 //Слушатели на иконку редактирования профиля и вставка дефолтного значения в поля формы
-profileButtonEdit.addEventListener('click', function () {
+profileButtonEdit.addEventListener('click', () => {
   popupEditProfile.open();
   userNameInput.value = userProfileInfo.getUserInfo().username;
   userPositionInput.value = userProfileInfo.getUserInfo().userinfo;
 });
 
-//3.Попап добавления карточки PopupWithFor
+//3.Попап добавления карточки PopupWithForm
 const popupAddCard = new PopupWithForm('#add-popup', {
   callbackSubmit: () => {
     const newCard = {
@@ -251,7 +259,7 @@ const popupAddCard = new PopupWithForm('#add-popup', {
 //Навешиваем слушатели на попап карточки
 popupAddCard.setEventListeners();
 //Слушатели на иконку добавления карточки
-profileButtonAdd.addEventListener('click', function () {
+profileButtonAdd.addEventListener('click', () => {
   popupAddCard.open();
   addCardFormPopup.resetValidation();
 });

@@ -4,22 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <script type="module" src="./script/index.js" defer></script>
+    <!--<link rel="stylesheet" href="./pages/index.css" />-->
+    <script type="module" src="./pages/index.js" defer></script>
     <title>Место</title>
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="black" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="white" />
   </head>
   <body class="root">
     <header class="header">
-      <img class="header__logo" src="./images/logo-pic.svg" alt="Лого" />
+      <img class="header__logo" src="<%=require('./images/logo-pic.svg')%>" alt="Лого" />
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__columns">
           <img
             class="profile__column-pic"
-            src="./images/profile-pic_.240x240.jpg"
+            src="<%=require('./images/profile-pic_.240x240.jpg')%>"
             alt="Фото профиля"
           />
           <div class="profile__column-bio">

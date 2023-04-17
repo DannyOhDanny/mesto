@@ -8,15 +8,15 @@ export default class Card {
     this._handleCardClick = handleCardClick;
   }
   //Создаем шаблон карточки
-  _getTemplate() {
+  _getTemplate = () => {
     const cardElement = document
       .querySelector(this._templateSelector)
       .content.querySelector('.element')
       .cloneNode(true);
     return cardElement;
-  }
+  };
 
-  generateCard() {
+  generateCard = () => {
     //Шаблон
     this._element = this._getTemplate();
     //Объявление переменных
@@ -38,15 +38,15 @@ export default class Card {
 
     // Возврат карточки
     return this._element;
-  }
+  };
   // Удалить карточки
-  _removeCard() {
+  _removeCard = () => {
     this._element.remove();
-  }
+  };
   // Лайкнуть карточку
-  _isLiked() {
+  _isLiked = () => {
     this._likeButton.classList.toggle('element__heart_active');
-  }
+  };
 
   //Слушатели на клик по изображению, корзине, лайку:
   _setEventListeners() {

@@ -11,7 +11,7 @@ export default class PopupwithForm extends Popup {
     this._callbackSubmit = callbackSubmit;
   }
   //Собираем данныем со всех полей форм
-  _getInputValues() {
+  _getInputValues = () => {
     this._inputValues = {};
     this._inputList.forEach(input => {
       this._inputValues[input.name] = input.value;
@@ -19,7 +19,7 @@ export default class PopupwithForm extends Popup {
     });
     //возвращаем массив
     return this._inputValues;
-  }
+  };
 
   setEventListeners() {
     super.setEventListeners();

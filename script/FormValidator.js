@@ -19,13 +19,13 @@ export default class FormValidator {
     console.log(errorElement.classList);
   }
   //Скрываем сообщение об ошибке
-  _hideInputError(inputElement) {
+  _hideInputError = inputElement => {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     console.log(errorElement);
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this.errorClass);
     errorElement.textContent = '';
-  }
+  };
   //Передаем параметры и проверяем валидность
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
