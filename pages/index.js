@@ -5,7 +5,6 @@ import './index.css';
 import {
   initialCards,
   settings,
-  initialCards,
   elementsContainer,
   profileButtonAdd,
   profileButtonEdit,
@@ -86,9 +85,11 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
 });
 //Cлушатели на попап
 popupEditProfile.setEventListeners();
+
 //Слушатели на иконку редактирования профиля и вставка дефолтного значения в поля формы
 profileButtonEdit.addEventListener('click', () => {
   popupEditProfile.open();
+  editProfileFormPopup.resetValidation();
   userNameInput.value = userProfileInfo.getUserInfo().username;
   userPositionInput.value = userProfileInfo.getUserInfo().userinfo;
 });

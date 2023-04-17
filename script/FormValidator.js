@@ -36,7 +36,6 @@ export default class FormValidator {
       //console.log('импут валиден');
     }
   }
-
   //Функиця очищения ошибок импута
   resetValidation() {
     this._toggleButtonState();
@@ -44,6 +43,7 @@ export default class FormValidator {
       this._hideInputError(inputElement);
     });
   }
+
   //Деактивация кнопки сабмита
   _disableSubmitButton() {
     this._submit.classList.add(this.settings.inactiveButtonClass);

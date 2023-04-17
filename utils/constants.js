@@ -66,7 +66,6 @@ const cardSection = '.elements';
 export {
   initialCards,
   settings,
-  initialCards,
   elementsContainer,
   profileButtonAdd,
   profileButtonEdit,
