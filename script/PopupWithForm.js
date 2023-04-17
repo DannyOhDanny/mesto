@@ -10,7 +10,7 @@ export default class PopupwithForm extends Popup {
     //Функция-колбек
     this._callbackSubmit = callbackSubmit;
   }
-  //Собираем данныем со всех полей форм
+  //Собираем данные со всех полей форм
   _getInputValues = () => {
     this._inputValues = {};
     this._inputList.forEach(input => {

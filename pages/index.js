@@ -236,7 +236,7 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
     popupEditProfile.close();
   }
 });
-//Навешиваем слушатели на попап
+//Cлушатели на попап
 popupEditProfile.setEventListeners();
 //Слушатели на иконку редактирования профиля и вставка дефолтного значения в поля формы
 profileButtonEdit.addEventListener('click', () => {
@@ -256,7 +256,7 @@ const popupAddCard = new PopupWithForm('#add-popup', {
     popupAddCard.close();
   }
 });
-//Навешиваем слушатели на попап карточки
+//Cлушатели на попап карточки
 popupAddCard.setEventListeners();
 //Слушатели на иконку добавления карточки
 profileButtonAdd.addEventListener('click', () => {
