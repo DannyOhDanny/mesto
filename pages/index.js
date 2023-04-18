@@ -90,8 +90,9 @@ popupEditProfile.setEventListeners();
 profileButtonEdit.addEventListener('click', () => {
   popupEditProfile.open();
   editProfileFormPopup.resetValidation();
-  userNameInput.value = userProfileInfo.getUserInfo().username;
-  userPositionInput.value = userProfileInfo.getUserInfo().userinfo;
+  const profileInfo = userProfileInfo.getUserInfo();
+  userNameInput.value = profileInfo.username;
+  userPositionInput.value = profileInfo.userinfo;
 });
 
 //3.Попап добавления карточки PopupWithForm
