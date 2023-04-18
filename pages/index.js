@@ -35,12 +35,6 @@ function createCardElement(item) {
   return cardElement;
 }
 
-//Код, добавляющий любые карточки в DOM
-function addCard(element) {
-  const elementTemplate = createCardElement(element);
-  elementsContainer.prepend(elementTemplate);
-}
-
 //Добавление готовых карточек из массива в document через класс Section
 const cardList = new Section(
   {
@@ -97,12 +91,12 @@ profileButtonEdit.addEventListener('click', () => {
 
 //3.Попап добавления карточки PopupWithForm
 const popupAddCard = new PopupWithForm('#add-popup', {
-  callbackSubmit: () => {
+  callbackSubmit: cardData => {
     const newCard = {
-      name: titleInput.value,
-      link: urlInput.value
+      name: cardData.picname,
+      link: cardData.url
     };
-    popupAddCard.addCard(newCard);
+    cardList.addItem(createCardElement(newCard));
     popupAddCard.close();
   }
 });
