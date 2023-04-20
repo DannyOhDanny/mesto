@@ -3,4 +3,6 @@
   margin: 0;
   display: block;
   min-height: 36px;
+  opacity: 1;
+  transition: opacity 0.6s, visibility 0.6s ease-in-out;
 }

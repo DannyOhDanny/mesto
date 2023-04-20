@@ -5,14 +5,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    main: './pages/index.js'
+    main: './src/pages/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
     publicPath: ''
+    //clean:true вместо плагина
   },
-  mode: 'development',
+  mode: 'development', //в финальной сборке - production
+  devtool: 'source-map',
   devServer: {
     static: path.resolve(__dirname, './dist'),
     open: true,
@@ -29,6 +31,10 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
         type: 'asset/resource'
+        //  отдельно правила для картинок и шрифтов с отдельными папками через generator/filename:''
+        /* generator:{
+          filename: 'img/[name].[hash][ext][query]' / filename: 'fonts/[name].[ext][query]'
+        }*/
       },
       {
         test: /\.css$/,
@@ -47,7 +53,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './src/index.html'
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin()

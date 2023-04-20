@@ -10,8 +10,6 @@ import {
   profileButtonEdit,
   userNameInput,
   userPositionInput,
-  titleInput,
-  urlInput,
   cardSection
 } from '../utils/constants.js';
 
@@ -82,11 +80,11 @@ popupEditProfile.setEventListeners();
 
 //Слушатели на иконку редактирования профиля и вставка дефолтного значения в поля формы
 profileButtonEdit.addEventListener('click', () => {
-  popupEditProfile.open();
-  editProfileFormPopup.resetValidation();
   const profileInfo = userProfileInfo.getUserInfo();
   userNameInput.value = profileInfo.username;
   userPositionInput.value = profileInfo.userinfo;
+  editProfileFormPopup.resetValidation();
+  popupEditProfile.open();
 });
 
 //3.Попап добавления карточки PopupWithForm
@@ -104,6 +102,6 @@ const popupAddCard = new PopupWithForm('#add-popup', {
 popupAddCard.setEventListeners();
 //Слушатели на иконку добавления карточки
 profileButtonAdd.addEventListener('click', () => {
-  popupAddCard.open();
   addCardFormPopup.resetValidation();
+  popupAddCard.open();
 });
