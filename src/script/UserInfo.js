@@ -10,6 +10,7 @@ export default class UserInfo {
       userinfo: this._userinfo.textContent
     };
   };
+
   //передача новых значений инпутов в разметку(не работает)
   setUserInfo = ({ username, userinfo }) => {
     this._username.textContent = username;

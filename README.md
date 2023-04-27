@@ -10,7 +10,7 @@
 - Работа над проектом проходила в локальном и удаленном репозиториях `Git`, `Git Hub` и `GitHub Pages`;
 - Проект был собран сборщиком модулей `webpack`;
 
-![Alt-текст](./images/project-mesto_preview.jpg 'Превью проекта')
+![Alt-текст](./src/images/project-mesto_preview.jpg 'Превью проекта')
 
 **Ссылка на GitHub Pages:**
 https://dannyohdanny.github.io/mesto/

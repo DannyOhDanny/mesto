@@ -3,9 +3,7 @@ import './index.css';
 
 //Импорт констант
 import {
-  initialCards,
   settings,
-  elementsContainer,
   profileButtonAdd,
   profileButtonEdit,
   userNameInput,
@@ -20,6 +18,36 @@ import FormValidator from '../script/FormValidator.js';
 import PopupWithImage from '../script/PopupWithImage.js';
 import PopupWithForm from '../script/PopupWithForm.js';
 import UserInfo from '../script/UserInfo.js';
+import Api from '../script/Api.js';
+
+//Объявление класса Api
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-65/',
+  headers: {
+    authorization: 'bbcfaa98-6a77-40f9-8ffe-975506acb190',
+    'Content-Type': 'application/json'
+  }
+});
+
+// Получение и отрисовка данных юзера из `${this._url}users/me
+api
+  .getProfileInfo()
+  .then(profileData => {
+    userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
+  })
+  .catch(err => {
+    console.warn(`Возникла ошибка в профиле:${err}`);
+  });
+// Получение и отрисовка данных карточек из `${this._url}cards
+api
+  .getCardsFromServer()
+  .then(cardData => {
+    cardList.renderItems(cardData);
+  })
+  .catch(error => {
+    console.warn(`Возникла ошибка в галерее картинок: ${error}`);
+  });
 
 //Функция вызова готового попапа по клику на изображение
 function handleCardClick(title, link) {
@@ -33,10 +61,9 @@ function createCardElement(item) {
   return cardElement;
 }
 
-//Добавление готовых карточек из массива в document через класс Section
+//Добавление готовых карточек c сервера в document через класс Section
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: cardItem => {
       const card = new Card(cardItem, '#element-template', handleCardClick);
       const cardElement = card.generateCard();
@@ -46,7 +73,7 @@ const cardList = new Section(
   cardSection
 );
 //Вызов рендера карточек
-cardList.renderItems();
+//cardList.renderItems();
 
 //Вызов класса FormValidator для попапов и активация валидации импутов к ним
 const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);

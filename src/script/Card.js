@@ -1,9 +1,10 @@
 // Класс Card, создающий карточки по конструктору из массива.
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
-    this._title = data.name;
-    this._link = data.link;
-    this._alt = data.name;
+  constructor(cardData, templateSelector, handleCardClick) {
+    this._cardItem = cardData;
+    this._title = this._cardItem.name;
+    this._link = this._cardItem.link;
+    this._alt = this._cardItem.name;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -24,17 +25,14 @@ export default class Card {
     this._cardImage = this._element.querySelector('.element__pic');
     this._likeButton = this._element.querySelector('.element__heart');
     this._deleteButton = this._element.querySelector('.element__delete-btn');
-    this._popupElement = document.querySelector('#image-popup');
-    this._popupImage = document.querySelector('.popup__pic');
-    this._popupTitle = document.querySelector('.popup__title');
 
     //Вызов  this._setEventListeners(); должен быть после объявления классовой переменной, чтобы в нём она была доступна.
     this._setEventListeners();
 
     // Присвоение значений карточке
     this._cardTitle.textContent = this._title;
-    this._cardImage.alt = `${this._title}`;
-    this._cardImage.src = `${this._link}`;
+    this._cardImage.alt = this._title;
+    this._cardImage.src = this._link;
 
     // Возврат карточки
     return this._element;
