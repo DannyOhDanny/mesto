@@ -25,4 +25,18 @@ export default class Api {
       headers: this._headers
     }).then(res => this._handleServerResponse(res));
   }
+
+  editProfile() {
+    return fetch(`${this._url}users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'Marie Skłodowska Curie',
+        about: 'Physicist and Chemist'
+      })
+    });
+  }
 }
