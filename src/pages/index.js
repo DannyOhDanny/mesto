@@ -6,10 +6,10 @@ import {
   settings,
   profileButtonAdd,
   profileButtonEdit,
+  avatarButtonEdit,
   userNameInput,
   userPositionInput,
-  cardSection,
-  avatarEditBtn
+  cardSection
 } from '../utils/constants.js';
 
 //Импорт классов в файл index.js
@@ -36,6 +36,18 @@ api
   .getProfileInfoFromServer()
   .then(profileData => {
     userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
+    console.log(profileData);
+  })
+  .catch(err => {
+    console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
+  });
+
+// Получение и отрисовка аватара юзера из `${this._url}users/me
+api
+  .getProfileInfoFromServer()
+  .then(profileData => {
+    userProfileInfo.setAvatarPic(profileData.avatar);
+    console.log(profileData);
   })
   .catch(err => {
     console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
@@ -45,6 +57,7 @@ api
 api
   .getCardsFromServer()
   .then(cardData => {
+    console.log(cardData);
     cardList.renderItems(cardData);
   })
   .catch(error => {
@@ -74,8 +87,6 @@ const cardList = new Section(
   },
   cardSection
 );
-//Вызов рендера карточек
-//cardList.renderItems();
 
 //Вызов класса FormValidator для попапов и активация валидации импутов к ним
 const addCardFormPopup = new FormValidator(settings, document.forms['card-form']);
@@ -83,6 +94,9 @@ addCardFormPopup.enableValidation();
 
 const editProfileFormPopup = new FormValidator(settings, document.forms['profile-form']);
 editProfileFormPopup.enableValidation();
+
+const editAvatarFormPopup = new FormValidator(settings, document.forms['avatar-form']);
+editAvatarFormPopup.enableValidation();
 
 //Вызов класса UserInfo с селекторами
 const userProfileInfo = new UserInfo({
@@ -103,12 +117,13 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
     api
       .editProfileInfo(profileData)
       .then(res => {
+        console.log(res);
         const newInfo = { name: res.name, position: res.about };
         userProfileInfo.setUserInfo(newInfo);
         popupEditProfile.close();
       })
       .catch(err => {
-        console.warn(`Ошибка заполенния профиля: ${(err, err.ok)} - ${err.statusText}`);
+        console.warn(`Ошибка  : ${(err, err.ok)} - ${err.statusText}`);
       });
   }
 });
@@ -116,13 +131,28 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
 popupEditProfile.setEventListeners();
 
 //3.Попап редактирования аватара
+const popupEditAvatar = new PopupWithForm('#avatar-popup', {
+  callbackSubmit: profileData => {
+    api
+      .editAvatarPic(profileData)
+      .then(res => {
+        console.log(res);
+        userProfileInfo.setAvatarPic(res.avatar);
+        popupEditAvatar.close();
+      })
+      .catch(err => {
+        console.warn(`Ошибка загрузки автара: ${(err, err.ok)} - ${err.statusText}`);
+      });
+  }
+});
 
-//объявление попапа +   api
-//объявление валидации попапа
-//слушатели на попап
-//resetValidation на попап
-//кнопка на клик + open + resetValidation
-//отправка инфо о url на сервер
+//Cлушатели на попап
+popupEditAvatar.setEventListeners();
+//Cлушатели на кнопку
+avatarButtonEdit.addEventListener('click', () => {
+  editAvatarFormPopup.resetValidation();
+  popupEditAvatar.open();
+});
 
 //Слушатели на иконку редактирования профиля и вставка дефолтного значения в поля формы
 profileButtonEdit.addEventListener('click', () => {
@@ -146,6 +176,7 @@ const popupAddCard = new PopupWithForm('#add-popup', {
 });
 //Cлушатели на попап карточки
 popupAddCard.setEventListeners();
+
 //Слушатели на иконку добавления карточки
 profileButtonAdd.addEventListener('click', () => {
   addCardFormPopup.resetValidation();

@@ -4,6 +4,7 @@ export default class UserInfo {
     this._userinfo = document.querySelector(userinfoSelector);
     this._avatar = document.querySelector(avatarSelector);
   }
+
   // Передача готовых значений из разметки в поля импутов
   getUserInfo = () => {
     return {
@@ -18,7 +19,8 @@ export default class UserInfo {
     this._userinfo.textContent = userinfo;
   };
 
-  setAvatarPic(avatarUrl) {
-    this._avatar.src = avatarUrl;
+  //передача новых значений инпутов в разметку
+  setAvatarPic(avatarlink) {
+    this._avatar.src = avatarlink;
   }
 }

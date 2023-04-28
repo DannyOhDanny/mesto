@@ -39,15 +39,15 @@ export default class Api {
     });
   }
 
-  /*editAvatarPic(avatarUrl) {
+  editAvatarPic(avatarUrl) {
     return fetch(`${this._url}users/me/avatar `, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: avatarUrl.avatar
+        avatar: avatarUrl.avatarlink
       })
     }).then(res => {
       return this._handleServerResponse(res);
     });
-  }*/
+  }
 }

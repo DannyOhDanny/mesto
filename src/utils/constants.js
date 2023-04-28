@@ -62,7 +62,7 @@ const userPositionInput = document.querySelector('.popup__input_type_position');
 const titleInput = document.querySelector('.popup__input_type_heading');
 const urlInput = document.querySelector('.popup__input_type_url');
 const cardSection = '.elements';
-const avatarEditBtn = document.querySelector('.profile__column-avatar-btn');
+const avatarButtonEdit = document.querySelector('.profile__column-avatar-btn');
 
 export {
   initialCards,
@@ -75,5 +75,5 @@ export {
   titleInput,
   urlInput,
   cardSection,
-  avatarEditBtn
+  avatarButtonEdit
 };

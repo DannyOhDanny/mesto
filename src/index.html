@@ -18,11 +18,7 @@
       <section class="profile">
         <div class="profile__columns">
           <div class="profile__column-avatar-btn">
-            <img
-              class="profile__column-pic"
-              src="<%=require('./images/profile-pic_.240x240.jpg')%>"
-              alt="Фото профиля"
-            />
+            <img class="profile__column-pic" src="" alt="Фото профиля" />
           </div>
           <div class="profile__column-bio">
             <div class="profile__row">
@@ -143,7 +139,7 @@
         <form class="popup__form" id="avatar-form" name="avatar-form" novalidate>
           <h2 class="popup__input-title">Обновить аватар</h2>
           <input
-            name="avatar"
+            name="avatarlink"
             placeholder="Ссылка на аватар"
             type="url"
             class="popup__input popup__input_type_url"
@@ -151,7 +147,7 @@
             id="avatar-input"
             pattern="^(http(s)?:\/\/)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$"
           />
-          <span class="popup__error url-input-error"></span>
+          <span class="popup__error avatar-input-error"></span>
           <button class="popup__button" type="submit" aria-label="Save">Сохранить</button>
         </form>
       </div>
