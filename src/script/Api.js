@@ -51,3 +51,13 @@ export default class Api {
     });
   }
 }
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-65/',
+  headers: {
+    authorization: 'bbcfaa98-6a77-40f9-8ffe-975506acb190',
+    'Content-Type': 'application/json'
+  }
+});
+
+export { Api, api };

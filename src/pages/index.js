@@ -19,17 +19,7 @@ import FormValidator from '../script/FormValidator.js';
 import PopupWithImage from '../script/PopupWithImage.js';
 import PopupWithForm from '../script/PopupWithForm.js';
 import UserInfo from '../script/UserInfo.js';
-import Api from '../script/Api.js';
-
-//Объявление класса Api
-
-const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-65/',
-  headers: {
-    authorization: 'bbcfaa98-6a77-40f9-8ffe-975506acb190',
-    'Content-Type': 'application/json'
-  }
-});
+import { api } from '../script/Api.js';
 
 // Получение и отрисовка данных юзера из `${this._url}users/me
 api
@@ -123,7 +113,7 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
         popupEditProfile.close();
       })
       .catch(err => {
-        console.warn(`Ошибка  : ${(err, err.ok)} - ${err.statusText}`);
+        console.warn(`Ошибка  : ${err} - ${err.statusText}`);
       });
   }
 });
@@ -141,7 +131,7 @@ const popupEditAvatar = new PopupWithForm('#avatar-popup', {
         popupEditAvatar.close();
       })
       .catch(err => {
-        console.warn(`Ошибка загрузки автара: ${(err, err.ok)} - ${err.statusText}`);
+        console.warn(`Ошибка загрузки автара: ${err} - ${err.statusText}`);
       });
   }
 });
