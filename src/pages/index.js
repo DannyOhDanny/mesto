@@ -8,7 +8,8 @@ import {
   profileButtonEdit,
   userNameInput,
   userPositionInput,
-  cardSection
+  cardSection,
+  avatarEditBtn
 } from '../utils/constants.js';
 
 //Импорт классов в файл index.js
@@ -32,13 +33,14 @@ const api = new Api({
 
 // Получение и отрисовка данных юзера из `${this._url}users/me
 api
-  .getProfileInfo()
+  .getProfileInfoFromServer()
   .then(profileData => {
     userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
   })
   .catch(err => {
-    console.warn(`Возникла ошибка в профиле:${err}`);
+    console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
   });
+
 // Получение и отрисовка данных карточек из `${this._url}cards
 api
   .getCardsFromServer()
@@ -46,7 +48,7 @@ api
     cardList.renderItems(cardData);
   })
   .catch(error => {
-    console.warn(`Возникла ошибка в галерее картинок: ${error}`);
+    console.warn(`Возникла ошибка в галерее картинок: ${error} - ${err.statusText}`);
   });
 
 //Функция вызова готового попапа по клику на изображение
@@ -85,7 +87,8 @@ editProfileFormPopup.enableValidation();
 //Вызов класса UserInfo с селекторами
 const userProfileInfo = new UserInfo({
   usernameSelector: '.profile__name',
-  userinfoSelector: '.profile__position'
+  userinfoSelector: '.profile__position',
+  avatarSelector: '.profile__column-pic'
 });
 
 //1. Попап изображения PopupWithImage
@@ -94,16 +97,32 @@ const popupOpenImage = new PopupWithImage('#image-popup');
 popupOpenImage.setEventListeners();
 
 //2. Попап редактирования инфо профиля PopupWithForm
-//Вызываем класс PopupWithForm с селекторами и колбэком
+//Вызываем класс PopupWithForm с селекторами и колбэком - подстановка новых значений импутов в объект на сервере
 const popupEditProfile = new PopupWithForm('#edit-popup', {
-  callbackSubmit: userData => {
-    const newInfo = { username: userData.name, userinfo: userData.position };
-    userProfileInfo.setUserInfo(newInfo);
-    popupEditProfile.close();
+  callbackSubmit: profileData => {
+    api
+      .editProfileInfo(profileData)
+      .then(res => {
+        const newInfo = { name: res.name, position: res.about };
+        userProfileInfo.setUserInfo(newInfo);
+        popupEditProfile.close();
+      })
+      .catch(err => {
+        console.warn(`Ошибка заполенния профиля: ${(err, err.ok)} - ${err.statusText}`);
+      });
   }
 });
 //Cлушатели на попап
 popupEditProfile.setEventListeners();
+
+//3.Попап редактирования аватара
+
+//объявление попапа +   api
+//объявление валидации попапа
+//слушатели на попап
+//resetValidation на попап
+//кнопка на клик + open + resetValidation
+//отправка инфо о url на сервер
 
 //Слушатели на иконку редактирования профиля и вставка дефолтного значения в поля формы
 profileButtonEdit.addEventListener('click', () => {

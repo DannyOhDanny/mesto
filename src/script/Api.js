@@ -12,7 +12,7 @@ export default class Api {
     }
   }
 
-  getProfileInfo() {
+  getProfileInfoFromServer() {
     return fetch(`${this._url}users/me`, {
       method: 'GET',
       headers: this._headers
@@ -26,17 +26,28 @@ export default class Api {
     }).then(res => this._handleServerResponse(res));
   }
 
-  editProfile() {
+  editProfileInfo(userInfo) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: {
-        authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        about: 'Physicist and Chemist'
+        name: userInfo.name,
+        about: userInfo.position
       })
+    }).then(res => {
+      return this._handleServerResponse(res);
     });
   }
+
+  /*editAvatarPic(avatarUrl) {
+    return fetch(`${this._url}users/me/avatar `, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatarUrl.avatar
+      })
+    }).then(res => {
+      return this._handleServerResponse(res);
+    });
+  }*/
 }

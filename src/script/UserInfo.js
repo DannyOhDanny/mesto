@@ -1,9 +1,10 @@
 export default class UserInfo {
-  constructor({ usernameSelector, userinfoSelector }) {
+  constructor({ usernameSelector, userinfoSelector, avatarSelector }) {
     this._username = document.querySelector(usernameSelector);
     this._userinfo = document.querySelector(userinfoSelector);
+    this._avatar = document.querySelector(avatarSelector);
   }
-  // Передача готовых значений из разметки в поля импутов(работает)
+  // Передача готовых значений из разметки в поля импутов
   getUserInfo = () => {
     return {
       username: this._username.textContent,
@@ -11,9 +12,13 @@ export default class UserInfo {
     };
   };
 
-  //передача новых значений инпутов в разметку(не работает)
+  //передача новых значений инпутов в разметку
   setUserInfo = ({ username, userinfo }) => {
     this._username.textContent = username;
     this._userinfo.textContent = userinfo;
   };
+
+  setAvatarPic(avatarUrl) {
+    this._avatar.src = avatarUrl;
+  }
 }

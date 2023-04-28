@@ -1,0 +1,35 @@
+.profile__column-avatar-btn {
+  display: block;
+  position: relative;
+}
+
+.profile__column-avatar-btn:after {
+  content: '';
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile__column-avatar-btn:before {
+  content: '';
+  position: absolute;
+  background: url(../../../images/profile_edit-pen.svg) no-repeat center center;
+  color: white;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.profile__column-avatar-btn:hover:before,
+.profile__column-avatar-btn:hover:after {
+  opacity: 1;
+}
