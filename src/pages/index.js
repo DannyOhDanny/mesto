@@ -117,6 +117,7 @@ const popupEditProfile = new PopupWithForm('#edit-popup', {
       });
   }
 });
+
 //Cлушатели на попап
 popupEditProfile.setEventListeners();
 
@@ -138,6 +139,7 @@ const popupEditAvatar = new PopupWithForm('#avatar-popup', {
 
 //Cлушатели на попап
 popupEditAvatar.setEventListeners();
+
 //Cлушатели на кнопку
 avatarButtonEdit.addEventListener('click', () => {
   editAvatarFormPopup.resetValidation();
@@ -153,17 +155,23 @@ profileButtonEdit.addEventListener('click', () => {
   popupEditProfile.open();
 });
 
-//3.Попап добавления карточки PopupWithForm
+//3.Попап добавления новой карточки PopupWithForm
 const popupAddCard = new PopupWithForm('#add-popup', {
   callbackSubmit: cardData => {
-    const newCard = {
-      name: cardData.picname,
-      link: cardData.url
-    };
-    cardList.addItem(createCardElement(newCard));
-    popupAddCard.close();
+    const newCardData = { name: cardData.picname, link: cardData.url };
+    api
+      .setNewCard(newCardData)
+      .then(newCard => {
+        cardList.addItem(createCardElement(newCard));
+        popupAddCard.close();
+        console.log(newCard);
+      })
+      .catch(err => {
+        console.warn(`Ошибка загрузки карточки: ${err} - ${err.statusText}`);
+      });
   }
 });
+
 //Cлушатели на попап карточки
 popupAddCard.setEventListeners();
 

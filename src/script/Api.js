@@ -40,12 +40,22 @@ export default class Api {
   }
 
   editAvatarPic(avatarUrl) {
-    return fetch(`${this._url}users/me/avatar `, {
+    return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatarUrl.avatarlink
       })
+    }).then(res => {
+      return this._handleServerResponse(res);
+    });
+  }
+
+  setNewCard(cardData) {
+    return fetch(`${this._url}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(cardData)
     }).then(res => {
       return this._handleServerResponse(res);
     });
