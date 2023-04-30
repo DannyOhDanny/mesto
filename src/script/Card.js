@@ -7,6 +7,7 @@ export default class Card {
     this._alt = this._cardItem.name;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._isOwn = true;
   }
   //Создаем шаблон карточки
   _getTemplate = () => {

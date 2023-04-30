@@ -9,6 +9,8 @@
   cursor: pointer;
   border: none;
   background-color: transparent;
+  display: flex;
+  justify-content: space-between;
 }
 
 .element__heart:hover {
