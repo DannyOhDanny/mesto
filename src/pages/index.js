@@ -22,15 +22,29 @@ import UserInfo from '../script/UserInfo.js';
 import { api } from '../script/Api.js';
 
 // Получение и отрисовка данных юзера из `${this._url}users/me
+
 api
   .getProfileInfoFromServer()
   .then(profileData => {
     userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
-    console.log(profileData);
+    //console.log(profileData);
   })
   .catch(err => {
     console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
   });
+
+api
+  .getProfileInfoFromServer()
+  .then(profileData => {
+    userId = profileData._id;
+    return userId.string;
+    console.log(`userID ${profileData._id}`);
+  })
+  .catch(err => {
+    console.warn(`Возникла ошибка в ID:${error} - ${err.statusText}`);
+  });
+
+let userId;
 
 // Получение и отрисовка аватара юзера из `${this._url}users/me
 api
@@ -61,7 +75,7 @@ function handleCardClick(title, link) {
 
 //Добавление новых карточек в document через Класс Card
 function createCardElement(item) {
-  const card = new Card(item, '#element-template', handleCardClick);
+  const card = new Card(item, '#element-template', handleCardClick, userId);
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -70,7 +84,7 @@ function createCardElement(item) {
 const cardList = new Section(
   {
     renderer: cardItem => {
-      const card = new Card(cardItem, '#element-template', handleCardClick);
+      const card = new Card(cardItem, '#element-template', handleCardClick, userId);
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
