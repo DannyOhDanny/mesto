@@ -60,6 +60,15 @@ export default class Api {
       return this._handleServerResponse(res);
     });
   }
+
+  async deleteMyCard(cardId) {
+    const res = await fetch(`${this._url}cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(res => {
+      return this._handleServerResponse(res);
+    });
+  }
 }
 
 const api = new Api({

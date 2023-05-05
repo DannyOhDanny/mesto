@@ -22,7 +22,6 @@ import UserInfo from '../script/UserInfo.js';
 import { api } from '../script/Api.js';
 
 // Получение и отрисовка данных юзера из `${this._url}users/me
-
 api
   .getProfileInfoFromServer()
   .then(profileData => {
@@ -33,28 +32,27 @@ api
     console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
   });
 
-api
-  .getProfileInfoFromServer()
-  .then(profileData => {
-    userId = profileData._id;
-    return userId.string;
-    console.log(`userID ${profileData._id}`);
-  })
-  .catch(err => {
-    console.warn(`Возникла ошибка в ID:${error} - ${err.statusText}`);
-  });
-
-let userId;
-
 // Получение и отрисовка аватара юзера из `${this._url}users/me
 api
   .getProfileInfoFromServer()
   .then(profileData => {
     userProfileInfo.setAvatarPic(profileData.avatar);
-    console.log(profileData);
+    //console.log(profileData);
   })
   .catch(err => {
     console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
+  });
+
+// Вынимаем собственный ID из JSON для дальнейшего сравнений с ID владельца карточки.
+let userId;
+
+api
+  .getProfileInfoFromServer()
+  .then(profileData => {
+    userId = profileData._id;
+  })
+  .catch(err => {
+    console.warn(`Возникла ошибка в ID:${error} - ${err.statusText}`);
   });
 
 // Получение и отрисовка данных карточек из `${this._url}cards
@@ -75,16 +73,31 @@ function handleCardClick(title, link) {
 
 //Добавление новых карточек в document через Класс Card
 function createCardElement(item) {
-  const card = new Card(item, '#element-template', handleCardClick, userId);
+  const card = new Card(item, '#element-template', handleCardClick, userId, handleCardDelete);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
+//функция удаления
+async function handleCardDelete(cardElement) {
+  try {
+    await api.deleteMyCard(cardElement.getId());
+    cardElement.removeCard();
+  } catch (error) {
+    console.error(`Ошибка при удалении карточки: ${error} - ${error.statusText}`);
+  }
+}
 //Добавление готовых карточек c сервера в document через класс Section
 const cardList = new Section(
   {
     renderer: cardItem => {
-      const card = new Card(cardItem, '#element-template', handleCardClick, userId);
+      const card = new Card(
+        cardItem,
+        '#element-template',
+        handleCardClick,
+        userId,
+        handleCardDelete
+      );
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
@@ -169,7 +182,7 @@ profileButtonEdit.addEventListener('click', () => {
   popupEditProfile.open();
 });
 
-//3.Попап добавления новой карточки PopupWithForm
+//4.Попап добавления новой карточки PopupWithForm
 const popupAddCard = new PopupWithForm('#add-popup', {
   callbackSubmit: cardData => {
     const newCardData = { name: cardData.picname, link: cardData.url };
@@ -194,3 +207,5 @@ profileButtonAdd.addEventListener('click', () => {
   addCardFormPopup.resetValidation();
   popupAddCard.open();
 });
+
+// 5. Попап подтверждения удаления
