@@ -26,6 +26,7 @@ https://dannyohdanny.github.io/mesto/
 [![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=github&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
 [![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=git&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
 [![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=markdown&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
+[![techstack logo](https://readme-components.vercel.app/api?component=logo&logo=webpack&fill=16a085)](https://github.com/harish-sethuraman/readme-components)
 
 **Системные требования:**
 
