@@ -57,6 +57,7 @@ const settings = {
 const elementsContainer = document.querySelector('.elements');
 const profileButtonEdit = document.querySelector('.profile__button-edit');
 const profileButtonAdd = document.querySelector('.profile__button-add');
+
 const userNameInput = document.querySelector('.popup__input_type_name');
 const userPositionInput = document.querySelector('.popup__input_type_position');
 const titleInput = document.querySelector('.popup__input_type_heading');

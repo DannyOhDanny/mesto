@@ -69,6 +69,24 @@ export default class Api {
       return this._handleServerResponse(res);
     });
   }
+
+  async putMyLike(cardId) {
+    const res = await fetch(`${this._url}cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers
+    }).then(res => {
+      return this._handleServerResponse(res);
+    });
+  }
+
+  async deleteMyLike(cardId) {
+    const res = await fetch(`${this._url}cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(res => {
+      return this._handleServerResponse(res);
+    });
+  }
 }
 
 const api = new Api({

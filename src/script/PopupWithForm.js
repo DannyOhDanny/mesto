@@ -9,6 +9,7 @@ export default class PopupwithForm extends Popup {
     this._inputList = Array.from(this._popupForm.querySelectorAll('.popup__input'));
     //Функция-колбек
     this._callbackSubmit = callbackSubmit;
+    this._submitButton = this._popupForm.querySelector('.popup__button');
   }
   //Собираем данные со всех полей форм
   _getInputValues = () => {
@@ -21,6 +22,13 @@ export default class PopupwithForm extends Popup {
     return this._inputValues;
   };
 
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = 'Сохранение...';
+    } else {
+      this._submitButton.textContent = 'Сохранить';
+    }
+  }
   setEventListeners() {
     super.setEventListeners();
     //Добавляем обработчик сабмита всех полей формы

@@ -18,10 +18,22 @@ import Section from '../script/Section.js';
 import FormValidator from '../script/FormValidator.js';
 import PopupWithImage from '../script/PopupWithImage.js';
 import PopupWithForm from '../script/PopupWithForm.js';
+import PopupWithConfirmation from '../script/PopupWithConfirmation.js';
 import UserInfo from '../script/UserInfo.js';
 import { api } from '../script/Api.js';
 
-// Получение и отрисовка данных юзера из `${this._url}users/me
+Promise.all([api.getProfileInfoFromServer(), api.getCardsFromServer()])
+  .then(([profileData, cardData]) => {
+    userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
+    userProfileInfo.setAvatarPic(profileData.avatar);
+    userId = profileData._id;
+    cardList.renderItems(cardData);
+  })
+  .catch(err =>
+    console.error(`Возникла ошибка загрузки данных с сервера:${err} - ${err.statusText}`)
+  );
+
+/*/ Получение и отрисовка данных юзера из `${this._url}users/me
 api
   .getProfileInfoFromServer()
   .then(profileData => {
@@ -44,7 +56,6 @@ api
   });
 
 // Вынимаем собственный ID из JSON для дальнейшего сравнений с ID владельца карточки.
-let userId;
 
 api
   .getProfileInfoFromServer()
@@ -64,21 +75,16 @@ api
   })
   .catch(error => {
     console.warn(`Возникла ошибка в галерее картинок: ${error} - ${err.statusText}`);
-  });
+  });*/
+
+// Переменная для ID пользователя
+let userId;
 
 //Функция вызова готового попапа по клику на изображение
 function handleCardClick(title, link) {
   popupOpenImage.open(title, link);
 }
-
-//Добавление новых карточек в document через Класс Card
-function createCardElement(item) {
-  const card = new Card(item, '#element-template', handleCardClick, userId, handleCardDelete);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
-//функция удаления
+//функция удаления карточки
 async function handleCardDelete(cardElement) {
   try {
     await api.deleteMyCard(cardElement.getId());
@@ -87,6 +93,38 @@ async function handleCardDelete(cardElement) {
     console.error(`Ошибка при удалении карточки: ${error} - ${error.statusText}`);
   }
 }
+
+async function handlePutCardLike(cardId) {
+  try {
+    await api.putMyLike(cardId);
+  } catch (error) {
+    console.error(`Ошибка при постановке лайка: ${error} - ${error.statusText}`);
+  }
+}
+
+async function handleDeleteCardLike(cardId) {
+  try {
+    await api.deleteMyLike(cardId);
+  } catch (error) {
+    console.error(`Ошибка при удалении лайка: ${error} - ${error.statusText}`);
+  }
+}
+
+//Добавление новых карточек в document через Класс Card
+function createCardElement(item) {
+  const card = new Card(
+    item,
+    '#element-template',
+    handleCardClick,
+    userId,
+    handleCardDelete,
+    handlePutCardLike,
+    handleDeleteCardLike
+  );
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
 //Добавление готовых карточек c сервера в document через класс Section
 const cardList = new Section(
   {
@@ -96,7 +134,9 @@ const cardList = new Section(
         '#element-template',
         handleCardClick,
         userId,
-        handleCardDelete
+        handleCardDelete,
+        handlePutCardLike,
+        handleDeleteCardLike
       );
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
@@ -131,17 +171,19 @@ popupOpenImage.setEventListeners();
 //Вызываем класс PopupWithForm с селекторами и колбэком - подстановка новых значений импутов в объект на сервере
 const popupEditProfile = new PopupWithForm('#edit-popup', {
   callbackSubmit: profileData => {
-    api
-      .editProfileInfo(profileData)
-      .then(res => {
-        console.log(res);
-        const newInfo = { name: res.name, position: res.about };
-        userProfileInfo.setUserInfo(newInfo);
-        popupEditProfile.close();
-      })
-      .catch(err => {
-        console.warn(`Ошибка  : ${err} - ${err.statusText}`);
-      });
+    popupEditProfile.renderLoading(true),
+      api
+        .editProfileInfo(profileData)
+        .then(res => {
+          console.log(res);
+          const newInfo = { name: res.name, position: res.about };
+          userProfileInfo.setUserInfo(newInfo);
+          popupEditProfile.close();
+        })
+        .catch(err => {
+          console.warn(`Ошибка загрузки данных профиля : ${err} - ${err.statusText}`);
+        })
+        .finally(() => popupEditProfile.renderLoading(false));
   }
 });
 
@@ -151,6 +193,7 @@ popupEditProfile.setEventListeners();
 //3.Попап редактирования аватара
 const popupEditAvatar = new PopupWithForm('#avatar-popup', {
   callbackSubmit: profileData => {
+    popupEditAvatar.renderLoading(true);
     api
       .editAvatarPic(profileData)
       .then(res => {
@@ -160,7 +203,8 @@ const popupEditAvatar = new PopupWithForm('#avatar-popup', {
       })
       .catch(err => {
         console.warn(`Ошибка загрузки автара: ${err} - ${err.statusText}`);
-      });
+      })
+      .finally(() => popupEditAvatar.renderLoading(false));
   }
 });
 
@@ -186,6 +230,7 @@ profileButtonEdit.addEventListener('click', () => {
 const popupAddCard = new PopupWithForm('#add-popup', {
   callbackSubmit: cardData => {
     const newCardData = { name: cardData.picname, link: cardData.url };
+    popupAddCard.renderLoading(true);
     api
       .setNewCard(newCardData)
       .then(newCard => {
@@ -195,7 +240,8 @@ const popupAddCard = new PopupWithForm('#add-popup', {
       })
       .catch(err => {
         console.warn(`Ошибка загрузки карточки: ${err} - ${err.statusText}`);
-      });
+      })
+      .finally(() => popupAddCard.renderLoading(false));
   }
 });
 
@@ -207,5 +253,3 @@ profileButtonAdd.addEventListener('click', () => {
   addCardFormPopup.resetValidation();
   popupAddCard.open();
 });
-
-// 5. Попап подтверждения удаления
