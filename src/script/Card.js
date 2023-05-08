@@ -1,4 +1,5 @@
 // Класс Card, создающий карточки по конструктору из массива.
+
 export default class Card {
   constructor(
     cardData,
@@ -6,36 +7,69 @@ export default class Card {
     handleCardClick,
     userId,
     handleCardDelete,
-    handlePutCardLike,
-    handleDeleteCardLike
+    { handleCardLikes }
   ) {
     this._cardItem = cardData;
     this._title = this._cardItem.name;
     this._link = this._cardItem.link;
     this._alt = this._cardItem.name;
-    this._templateSelector = templateSelector;
+    this._likes = this._cardItem.likes;
 
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
-    this._handlePutCardLike = handlePutCardLike;
-    this._handleDeleteCardLike = handleDeleteCardLike;
+    this._handleCardLikes = handleCardLikes;
 
-    this._ownerId = this._cardItem.owner._id;
+    this._templateSelector = templateSelector;
+
     this._userId = userId;
     this._cardId = this._cardItem._id;
+    this._ownerId = this._cardItem.owner._id;
   }
+
   // Создаем шаблон карточки
-  _getTemplate = () => {
+  _getTemplate() {
     const cardElement = document
       .querySelector(this._templateSelector)
       .content.querySelector('.element')
       .cloneNode(true);
     return cardElement;
-  };
+  }
 
-  generateCard = () => {
+  getId() {
+    return this._cardId;
+  }
+
+  // Удалить карточки
+  removeCard() {
+    this._element.remove();
+    this._element = null;
+  }
+
+  // Проверка наличия моего лайка на карточке
+  hasMyLike() {
+    return this._likes.some(user => user._id === this._userId);
+  }
+  // Лайкнуть/убрать лайк с карточки
+  isLiked() {
+    this._likeButton.classList.add('element__heart_active');
+  }
+  isNotLiked() {
+    this._likeButton.classList.remove('element__heart_active');
+  }
+
+  _checkMyLike() {
+    this.hasMyLike() ? this.isLiked() : this.isNotLiked();
+  }
+  // Загрузка кол-ва лайков с сервера - находим св-во объекта и длинну массива, проверяем на свой лайк
+  showCardLikes(data) {
+    this._likes = data;
+    this._likeElement.textContent = this._likes.length;
+  }
+
+  generateCard() {
     // Шаблон
     this._element = this._getTemplate();
+
     // Объявление переменных
     this._cardTitle = this._element.querySelector('.element__title');
     this._cardImage = this._element.querySelector('.element__pic');
@@ -53,7 +87,10 @@ export default class Card {
     this._element.dataset.cardId = this._cardId;
 
     // Отображение лайков
-    this.showLikes(this._cardItem);
+
+    this.showCardLikes(this._likes);
+
+    this._checkMyLike();
 
     //Сравниваем свой ID c ID автора карточки
     if (this._ownerId !== this._userId) {
@@ -65,50 +102,8 @@ export default class Card {
     console.log(`card ID: ${this._cardId}`);
 
     // Возврат карточки
+
     return this._element;
-  };
-
-  getId() {
-    return this._cardId;
-  }
-
-  // Удалить карточки
-  removeCard() {
-    this._element.remove();
-    this._element = null;
-  }
-
-  // Лайкнуть/убрать лайк с карточки
-  _isLiked() {
-    this._likeButton.classList.add('element__heart_active');
-  }
-
-  _isNotLiked() {
-    this._likeButton.classList.remove('element__heart_active');
-  }
-
-  // Проверка наличия моего лайка на карточке
-  _hasMyLike() {
-    return this.likesCounter.some(like => like._id === this._userId);
-  }
-
-  // Загрузка кол-ва лайков с сервера - находим св-во объекта и длинну массива, проверяем на свой лайк
-  showLikes = cardElement => {
-    this.likesCounter = cardElement.likes;
-    this.likesNumber = this.likesCounter.length;
-    this._likeElement.textContent = this.likesNumber;
-
-    this._hasMyLike() ? this._isLiked() : this._isNotLiked();
-
-    console.log(this.likesCounter);
-    console.log(this.likesNumber);
-  };
-
-  //Добавление и удаление лайков через API
-  _handleLikes() {
-    this._hasMyLike()
-      ? this._handleDeleteCardLike(this._cardId)
-      : this._handlePutCardLike(this._cardId);
   }
 
   //Слушатели на клик по изображению, корзине, лайку:
@@ -117,13 +112,15 @@ export default class Card {
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._title, this._link);
     });
+
     //Слушатель на кнопку удаления
     this._deleteButton.addEventListener('click', () => {
       this._handleCardDelete(this);
     });
+
     // Слушатель на кнопку лайка
     this._likeButton.addEventListener('click', () => {
-      this._handleLikes();
+      this._handleCardLikes(this);
     });
   }
 }

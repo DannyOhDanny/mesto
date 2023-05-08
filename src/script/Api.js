@@ -26,13 +26,13 @@ export default class Api {
     }).then(res => this._handleServerResponse(res));
   }
 
-  editProfileInfo(userInfo) {
+  editProfileInfo({ name, position }) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: userInfo.name,
-        about: userInfo.position
+        name: name,
+        about: position
       })
     }).then(res => {
       return this._handleServerResponse(res);
@@ -61,8 +61,8 @@ export default class Api {
     });
   }
 
-  async deleteMyCard(cardId) {
-    const res = await fetch(`${this._url}cards/${cardId}`, {
+  deleteMyCard(cardId) {
+    return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
     }).then(res => {
@@ -70,8 +70,8 @@ export default class Api {
     });
   }
 
-  async putMyLike(cardId) {
-    const res = await fetch(`${this._url}cards/${cardId}/likes`, {
+  putMyLike(cardId) {
+    return fetch(`${this._url}cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
     }).then(res => {
@@ -79,8 +79,8 @@ export default class Api {
     });
   }
 
-  async deleteMyLike(cardId) {
-    const res = await fetch(`${this._url}cards/${cardId}/likes`, {
+  deleteMyLike(cardId) {
+    return fetch(`${this._url}cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers
     }).then(res => {

@@ -29,6 +29,7 @@ export default class PopupwithForm extends Popup {
       this._submitButton.textContent = 'Сохранить';
     }
   }
+
   setEventListeners() {
     super.setEventListeners();
     //Добавляем обработчик сабмита всех полей формы

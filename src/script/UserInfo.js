@@ -6,20 +6,20 @@ export default class UserInfo {
   }
 
   // Передача готовых значений из разметки в поля импутов
-  getUserInfo = () => {
+  getUserInfo() {
     return {
       username: this._username.textContent,
       userinfo: this._userinfo.textContent
     };
-  };
+  }
 
   //передача новых значений инпутов в разметку
-  setUserInfo = ({ username, userinfo }) => {
+  setUserInfo({ username, userinfo }) {
     this._username.textContent = username;
     this._userinfo.textContent = userinfo;
-  };
+  }
 
-  //передача новых значений инпутов в разметку
+  //Передача новых значений инпутов в разметку
   setAvatarPic(avatarlink) {
     this._avatar.src = avatarlink;
   }
