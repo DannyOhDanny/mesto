@@ -13,7 +13,7 @@ export default class UserInfo {
     };
   }
 
-  //передача новых значений инпутов в разметку
+  // Передача новых значений инпутов в разметку через объект
   setUserInfo({ username, userinfo }) {
     this._username.textContent = username;
     this._userinfo.textContent = userinfo;

@@ -7,7 +7,7 @@ export default class Section {
   renderItems(res) {
     res.forEach(this._renderer);
   }
-
+  //Добавление элемента в контейнер
   addItem = element => {
     this._container.prepend(element);
   };

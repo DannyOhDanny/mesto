@@ -61,7 +61,7 @@ export default class Api {
     });
   }
 
-  deleteMyCard(cardId) {
+  deleteUserCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
@@ -70,7 +70,7 @@ export default class Api {
     });
   }
 
-  putMyLike(cardId) {
+  putUserLike(cardId) {
     return fetch(`${this._url}cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this._headers
@@ -79,7 +79,7 @@ export default class Api {
     });
   }
 
-  deleteMyLike(cardId) {
+  deleteUserLike(cardId) {
     return fetch(`${this._url}cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this._headers

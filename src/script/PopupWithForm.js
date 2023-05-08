@@ -11,17 +11,18 @@ export default class PopupwithForm extends Popup {
     this._callbackSubmit = callbackSubmit;
     this._submitButton = this._popupForm.querySelector('.popup__button');
   }
-  //Собираем данные со всех полей форм
+  //Сбор данных со всех полей формы
   _getInputValues = () => {
     this._inputValues = {};
     this._inputList.forEach(input => {
       this._inputValues[input.name] = input.value;
-      console.log(this._inputValues);
+      //console.log(this._inputValues);
     });
     //возвращаем массив
     return this._inputValues;
   };
 
+  //Внешняя ф-ия появления текста о сохранении информации
   renderLoading(isLoading) {
     if (isLoading) {
       this._submitButton.textContent = 'Сохранение...';

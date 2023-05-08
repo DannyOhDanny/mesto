@@ -8,7 +8,7 @@ export default class popupWithImage extends Popup {
   }
 
   open(title, link) {
-    //передаем аргументы в попап тут
+    //Передаем аргументы картинки в шаблон попапа
     this._link.alt = title;
     this._title.textContent = title;
     this._link.src = link;
