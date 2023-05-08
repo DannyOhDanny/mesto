@@ -4,23 +4,24 @@ export default class Card {
   constructor(
     cardData,
     templateSelector,
-    handleCardClick,
+    { handleCardClick },
     userId,
-    handleCardDelete,
+    { handleCardDelete },
     { handleCardLikes }
   ) {
+    //Данные карточки - название, сслыка, альт, лайкиы
     this._cardItem = cardData;
     this._title = this._cardItem.name;
     this._link = this._cardItem.link;
     this._alt = this._cardItem.name;
     this._likes = this._cardItem.likes;
-
+    //Колбеки увеличения, удаления, лайка
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
     this._handleCardLikes = handleCardLikes;
-
+    //Селектор шаблона
     this._templateSelector = templateSelector;
-
+    //IDs
     this._userId = userId;
     this._cardId = this._cardItem._id;
     this._ownerId = this._cardItem.owner._id;
@@ -35,11 +36,7 @@ export default class Card {
     return cardElement;
   }
 
-  getId() {
-    return this._cardId;
-  }
-
-  // Удалить карточки
+  // Удалить карточки из DOM
   removeCard() {
     this._element.remove();
     this._element = null;
@@ -56,16 +53,16 @@ export default class Card {
   isNotLiked() {
     this._likeButton.classList.remove('element__heart_active');
   }
-
+  //Переключаем иконку лайка по результатут проверки массива лайков карточки.
   _checkMyLike() {
     this.hasMyLike() ? this.isLiked() : this.isNotLiked();
   }
-  // Загрузка кол-ва лайков с сервера - находим св-во объекта и длинну массива, проверяем на свой лайк
+  // Загрузка кол-ва лайков с сервера - находим св-во объекта и длинну массива и передаем во вне
   showCardLikes(data) {
     this._likes = data;
     this._likeElement.textContent = this._likes.length;
   }
-
+  //Генерация карточки
   generateCard() {
     // Шаблон
     this._element = this._getTemplate();
@@ -86,8 +83,7 @@ export default class Card {
     this._cardImage.src = this._link;
     this._element.dataset.cardId = this._cardId;
 
-    // Отображение лайков
-
+    // Отображение и проверка ID лайков
     this.showCardLikes(this._likes);
 
     this._checkMyLike();
@@ -97,12 +93,11 @@ export default class Card {
       this._deleteButton.classList.add('element__delete-btn_type_hidden');
     }
 
-    console.log(`owner ID: ${this._ownerId}`);
-    console.log(`my ID: ${this._userId}`);
-    console.log(`card ID: ${this._cardId}`);
+    //console.log(`owner ID: ${this._ownerId}`);
+    //console.log(`my ID: ${this._userId}`);
+    //console.log(`card ID: ${this._cardId}`);
 
     // Возврат карточки
-
     return this._element;
   }
 

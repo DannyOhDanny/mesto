@@ -24,105 +24,92 @@ import { api } from '../script/Api.js';
 
 Promise.all([api.getProfileInfoFromServer(), api.getCardsFromServer()])
   .then(([profileData, cardData]) => {
+    // Получение и отрисовка данных юзера из `${this._url}users/me
     userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
+    // Получение и отрисовка аватара юзера из `${this._url}users/me
     userProfileInfo.setAvatarPic(profileData.avatar);
+    // Получение собственного user-ID из JSON для дальнейшего сравнений с owner- ID владельца карточки.
     userId = profileData._id;
+    // Получение и отрисовка данных карточек из `${this._url}cards + метод reverse ставитт карточку в массиве на 1ое место
     cardList.renderItems(cardData.reverse());
   })
   .catch(err =>
     console.error(`Возникла ошибка загрузки данных с сервера:${err} - ${err.statusText}`)
   );
 
-/*/ Получение и отрисовка данных юзера из `${this._url}users/me
-api
-  .getProfileInfoFromServer()
-  .then(profileData => {
-    userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
-    //console.log(profileData);
-  })
-  .catch(err => {
-    console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
-  });
-
-// Получение и отрисовка аватара юзера из `${this._url}users/me
-api
-  .getProfileInfoFromServer()
-  .then(profileData => {
-    userProfileInfo.setAvatarPic(profileData.avatar);
-    //console.log(profileData);
-  })
-  .catch(err => {
-    console.warn(`Возникла ошибка в профиле:${error} - ${err.statusText}`);
-  });
-
-// Вынимаем собственный ID из JSON для дальнейшего сравнений с ID владельца карточки.
-
-api
-  .getProfileInfoFromServer()
-  .then(profileData => {
-    userId = profileData._id;
-  })
-  .catch(err => {
-    console.warn(`Возникла ошибка в ID:${error} - ${err.statusText}`);
-  });
-
-// Получение и отрисовка данных карточек из `${this._url}cards
-api
-  .getCardsFromServer()
-  .then(cardData => {
-    console.log(cardData);
-    cardList.renderItems(cardData);
-  })
-  .catch(error => {
-    console.warn(`Возникла ошибка в галерее картинок: ${error} - ${err.statusText}`);
-  });*/
-
 // Переменная для ID пользователя
 let userId;
 
-//Функция вызова готового попапа по клику на изображение
-function handleCardClick(title, link) {
-  popupOpenImage.open(title, link);
-}
-// Функция удаления карточки
-async function handleCardDelete(cardElement) {
-  try {
-    await api.deleteMyCard(cardElement.getId());
-    cardElement.removeCard();
-  } catch (error) {
-    console.error(`Ошибка при удалении карточки: ${error} - ${error.statusText}`);
-  }
-}
-
 //Добавление новых карточек в document через Класс Card
 function createCardElement(item) {
-  const card = new Card(item, '#element-template', handleCardClick, userId, handleCardDelete, {
-    handleCardLikes: () => {
-      if (card.hasMyLike()) {
-        api
-          .deleteMyLike(item._id)
-          .then(item => {
-            card.isNotLiked();
-            card.showCardLikes(item.likes);
-            console.log(item.likes);
-          })
-          .catch(error => {
-            console.error(`Ошибка при удалении лайка: ${error} - ${error.statusText}`);
-          });
-      } else {
-        api
-          .putMyLike(item._id)
-          .then(item => {
-            card.isLiked();
-            card.showCardLikes(item.likes);
-            console.log(item.likes);
-          })
-          .catch(error => {
-            console.error(`Ошибка при постановке лайка: ${error} - ${error.statusText}`);
-          });
+  const card = new Card(
+    item,
+    '#element-template',
+    //Колбек увеличения фото
+    {
+      handleCardClick: () => {
+        popupOpenImage.open(item.title, item.link);
+      }
+    },
+    userId,
+    {
+      //Колбек удаления карточки
+      handleCardDelete: () => {
+        //Открываем попап подтверждения удаления и навешиваем слушаетли
+        PopupConfirmDelete.open();
+        //Передаем попапу колбек удаления по нажатию на сабмит
+        PopupConfirmDelete.handleSubmit(() => {
+          //Вызываем ф-ию удаления карточки с сервера через класс API
+          api
+            .deleteMyCard(item._id)
+            .then(() => {
+              //Выполняем удаление карточки из DOM
+              card.removeCard();
+              //Закрываем попап и удаляем слушатели
+              PopupConfirmDelete.close();
+            })
+            //Ловим ошибки
+            .catch(err => {
+              console.error(`Ошибка при удалении карточки: ${err.status} - ${err.statusText}`);
+            });
+        });
+      }
+    },
+    {
+      //Колбек постановки лайка карточке
+      handleCardLikes: () => {
+        //Проверяем, есть ли user._id ав массиве лайков
+        //Если есть, то вызываем удаления лайка из массива  сервера через класс API
+        if (card.hasMyLike()) {
+          api
+            .deleteMyLike(item._id)
+            .then(item => {
+              //Убираем отметку лайка с иконки в DOM
+              card.isNotLiked();
+              //Показываем кол-во лайков в DOM
+              card.showCardLikes(item.likes);
+              //console.log(item.likes);
+            })
+            //Ловим ошибки
+            .catch(error => {
+              console.error(`Ошибка при удалении лайка: ${error.status} - ${error.statusText}`);
+            });
+        } else {
+          //Если нет, то вызываем добавление лайка в массив на сервер через класс API
+          api
+            .putMyLike(item._id)
+            .then(item => {
+              card.isLiked();
+              card.showCardLikes(item.likes);
+              //console.log(item.likes);
+            })
+            .catch(error => {
+              console.error(`Ошибка при постановке лайка: ${error.status} - ${error.statusText}`);
+            });
+        }
       }
     }
-  });
+  );
   const cardElement = card.generateCard();
   return cardElement;
 }
@@ -244,3 +231,21 @@ avatarButtonEdit.addEventListener('click', () => {
   editAvatarFormPopup.resetValidation();
   popupEditAvatar.open();
 });
+
+//5.Попап подтверждения удаления карточки
+const PopupConfirmDelete = new PopupWithConfirmation('#delete-popup', {
+  callbackSubmit: cardId => {
+    //Колбек удаления карточки - через вызов удаления по классу API
+    api
+      .deleteMyCard(cardId)
+      .then(() => {
+        //закрытие попапа подтверждения удаления
+        PopupConfirmDelete.close();
+      })
+      .catch(err => {
+        console.warn(`Ошибка подтверждения удаления карточки: ${err.status} - ${err.statusText}`);
+      });
+  }
+});
+
+PopupConfirmDelete.setEventListeners();
