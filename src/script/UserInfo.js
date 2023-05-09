@@ -5,7 +5,7 @@ export default class UserInfo {
     this._avatar = document.querySelector(avatarSelector);
   }
 
-  // Передача готовых значений из разметки в поля импутов
+  // Передача новых значений из разметки в поля импутов
   getUserInfo() {
     return {
       username: this._username.textContent,
@@ -13,7 +13,7 @@ export default class UserInfo {
     };
   }
 
-  // Передача новых значений инпутов в разметку через объект
+  // Передача готовых значений из массива на сервере в разметку через объект
   setUserInfo({ username, userinfo }) {
     this._username.textContent = username;
     this._userinfo.textContent = userinfo;

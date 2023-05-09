@@ -1,11 +1,11 @@
 export default class Section {
-  constructor({ renderer }, containerSelector) {
-    this._renderer = renderer;
+  constructor({ itemRenderer }, containerSelector) {
+    this._items = itemRenderer;
     this._container = document.querySelector(containerSelector);
   }
   //Отрисовка каждой карточки, полученной с сервера
   renderItems(res) {
-    res.forEach(this._renderer);
+    res.forEach(this._items);
   }
   //Добавление элемента в контейнер
   addItem = element => {

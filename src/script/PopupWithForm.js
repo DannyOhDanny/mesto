@@ -13,6 +13,7 @@ export default class PopupwithForm extends Popup {
   }
   //Сбор данных со всех полей формы
   _getInputValues = () => {
+    //данные массива сохранены в объект
     this._inputValues = {};
     this._inputList.forEach(input => {
       this._inputValues[input.name] = input.value;
@@ -24,16 +25,14 @@ export default class PopupwithForm extends Popup {
 
   //Внешняя ф-ия появления текста о сохранении информации
   renderLoading(isLoading) {
-    if (isLoading) {
-      this._submitButton.textContent = 'Сохранение...';
-    } else {
-      this._submitButton.textContent = 'Сохранить';
-    }
+    isLoading
+      ? (this._submitButton.textContent = 'Сохранение...')
+      : (this._submitButton.textContent = 'Сохранить');
   }
 
   setEventListeners() {
     super.setEventListeners();
-    //Добавляем обработчик сабмита всех полей формы
+    //Добавляем обработчик сабмита всех полей формы и передаем данные через колбек
     this._popupForm.addEventListener('submit', evt => {
       evt.preventDefault();
       this._callbackSubmit(this._getInputValues());

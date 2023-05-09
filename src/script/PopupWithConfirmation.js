@@ -5,7 +5,7 @@ export default class PopupwithConfirmation extends Popup {
     super(popupSelector);
     this._callbackSubmit = callbackSubmit;
   }
-  //Передаем колбэк
+  //Передаем в колбэк колбэк
   handleSubmit(callback) {
     this._callbackSubmit = callback;
   }

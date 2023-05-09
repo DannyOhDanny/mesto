@@ -25,7 +25,8 @@ import { api } from '../script/Api.js';
 Promise.all([api.getProfileInfoFromServer(), api.getCardsFromServer()])
   .then(([profileData, cardData]) => {
     // Получение и отрисовка данных профиля пользователя из `${this._url}users/me
-    userProfileInfo.setUserInfo({ username: profileData.name, userinfo: profileData.about });
+    const initialProfileData = { username: profileData.name, userinfo: profileData.about };
+    userProfileInfo.setUserInfo(initialProfileData);
     // Получение и отрисовка аватара пользователя из `${this._url}users/me
     userProfileInfo.setAvatarPic(profileData.avatar);
     // Получение user-ID пользователя из JSON для дальнейшего сравнений с owner-ID владельца карточки.
@@ -48,15 +49,16 @@ function createCardElement(item) {
     //Колбек увеличения фото
     {
       handleCardClick: () => {
+        //Передаем данные .name и .link из объекта карточки в попап
         popupOpenImage.open(item.name, item.link);
-        console.log(item.name, item.link);
+        //console.log(item.name, item.link);
       }
     },
     userId,
     {
       //Колбек удаления карточки
       handleCardDelete: () => {
-        //Открываем попап подтверждения удаления карточки и навешиваем слушатели
+        //Открываем попап подтверждения удаления карточки
         popupConfirmDelete.open();
         //Передаем попапу колбек удаления по нажатию на кнопку Submit
         popupConfirmDelete.handleSubmit(() => {
@@ -118,7 +120,7 @@ function createCardElement(item) {
 //Добавление готовых карточек из массива на сервере в document через класс Section
 const cardList = new Section(
   {
-    renderer: cardItem => {
+    itemRenderer: cardItem => {
       cardList.addItem(createCardElement(cardItem));
     }
   },
@@ -181,7 +183,7 @@ const popupEditAvatar = new PopupWithForm('#avatar-popup', {
     api
       .editAvatarPic(profileData)
       .then(res => {
-        console.log(res);
+        //console.log(res);
         userProfileInfo.setAvatarPic(res.avatar);
         popupEditAvatar.close();
       })
@@ -208,7 +210,7 @@ const popupAddCard = new PopupWithForm('#add-popup', {
         //console.log(newCard);
       })
       .catch(err => {
-        console.warn(`Ошибка загрузки карточки: ${err} - ${err.statusText}`);
+        console.warn(`Ошибка загрузки карточки: ${err.status} - ${err.statusText}`);
       })
       .finally(() => popupAddCard.renderLoading(false));
   }

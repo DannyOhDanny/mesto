@@ -9,7 +9,7 @@ export default class Card {
     { handleCardDelete },
     { handleCardLikes }
   ) {
-    //Данные карточки - название, сслыка, альт, лайкиы
+    //Данные карточки - название, сслыка, альт, лайки
     this._cardItem = cardData;
     this._title = this._cardItem.name;
     this._link = this._cardItem.link;
@@ -57,6 +57,12 @@ export default class Card {
   _checkMyLike() {
     this.hasMyLike() ? this.isLiked() : this.isNotLiked();
   }
+  //Сравниваем свой ID c ID автора карточки
+  _checkMyCard() {
+    if (this._ownerId !== this._userId) {
+      this._deleteButton.classList.add('element__delete-btn_type_hidden');
+    }
+  }
   // Загрузка кол-ва лайков с сервера - находим св-во объекта и длинну массива и передаем во вне
   showCardLikes(data) {
     this._likes = data;
@@ -89,9 +95,7 @@ export default class Card {
     this._checkMyLike();
 
     //Сравниваем свой ID c ID автора карточки
-    if (this._ownerId !== this._userId) {
-      this._deleteButton.classList.add('element__delete-btn_type_hidden');
-    }
+    this._checkMyCard();
 
     //console.log(`owner ID: ${this._ownerId}`);
     //console.log(`my ID: ${this._userId}`);

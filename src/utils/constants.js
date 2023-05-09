@@ -1,4 +1,4 @@
-// Импорт картинок
+// Импорт картинок для webpack
 const solnechnogorsk = new URL('../images/element_pic-4.jpg', import.meta.url);
 const kurshskayaKosa = new URL('../images/element_pic-5.jpg', import.meta.url);
 const vyborg = new URL('../images/element_pic-6.jpg', import.meta.url);
