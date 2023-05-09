@@ -5,25 +5,19 @@ export default class PopupwithConfirmation extends Popup {
     super(popupSelector);
     this._callbackSubmit = callbackSubmit;
   }
-
-  handleSubmit(submitConfirm) {
-    this._callbackSubmit = submitConfirm;
+  //Передаем колбэк
+  handleSubmit(callback) {
+    this._callbackSubmit = callback;
   }
+  //Выносим в стрелочную функцию передачу колбэка
+  _setEventForSubmit = e => {
+    e.preventDefault();
+    this._callbackSubmit();
+  };
 
-  //Добавляем слушатель на кнопку Submit - колбек и evt.preventDefault();
-  open() {
-    super.open();
-    this._popup.addEventListener('submit', evt => {
-      evt.preventDefault();
-      this._callbackSubmit();
-    });
-  }
-  //Удаляем слушатели на кнопку Submit
-  close() {
-    super.close();
-    this._popup.removeEventListener('submit', evt => {
-      evt.preventDefault();
-      this._callbackSubmit();
-    });
+  setEventListeners() {
+    super.setEventListeners();
+    //Передаем функцию сабмиту + настраиваем отработку слушателя 1 раз { once: true }
+    this._popup.addEventListener('submit', this._setEventForSubmit), { once: true };
   }
 }

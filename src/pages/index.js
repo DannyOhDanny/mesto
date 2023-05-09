@@ -48,7 +48,8 @@ function createCardElement(item) {
     //Колбек увеличения фото
     {
       handleCardClick: () => {
-        popupOpenImage.open(item.title, item.link);
+        popupOpenImage.open(item.name, item.link);
+        console.log(item.name, item.link);
       }
     },
     userId,
@@ -56,9 +57,9 @@ function createCardElement(item) {
       //Колбек удаления карточки
       handleCardDelete: () => {
         //Открываем попап подтверждения удаления карточки и навешиваем слушатели
-        PopupConfirmDelete.open();
+        popupConfirmDelete.open();
         //Передаем попапу колбек удаления по нажатию на кнопку Submit
-        PopupConfirmDelete.handleSubmit(() => {
+        popupConfirmDelete.handleSubmit(() => {
           //Вызываем ф-ию удаления карточки с сервера через класс API
           api
             .deleteUserCard(item._id)
@@ -66,7 +67,7 @@ function createCardElement(item) {
               //Выполняем удаление карточки из DOM
               card.removeCard();
               //Закрываем попап и удаляем слушатели
-              PopupConfirmDelete.close();
+              popupConfirmDelete.close();
             })
             //Ловим ошибки
             .catch(err => {
@@ -239,14 +240,14 @@ avatarButtonEdit.addEventListener('click', () => {
 
 //5.Попап подтверждения удаления карточки
 //Объявление класса PopupConfirmDelete с подтверждением удаления
-const PopupConfirmDelete = new PopupWithConfirmation('#delete-popup', {
+const popupConfirmDelete = new PopupWithConfirmation('#delete-popup', {
   callbackSubmit: cardId => {
     //Колбек удаления карточки - через вызов удаления по классу API + значение.
     api
       .deleteMyCard(cardId)
       .then(() => {
         //Закрытие попапа подтверждения удаления
-        PopupConfirmDelete.close();
+        popupConfirmDelete.close();
       })
       .catch(err => {
         console.warn(`Ошибка подтверждения удаления карточки: ${err.status} - ${err.statusText}`);
@@ -254,4 +255,4 @@ const PopupConfirmDelete = new PopupWithConfirmation('#delete-popup', {
   }
 });
 
-PopupConfirmDelete.setEventListeners();
+popupConfirmDelete.setEventListeners();
